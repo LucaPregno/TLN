@@ -1,6 +1,7 @@
 from nltk import sent_tokenize
 from nltk import pos_tag, word_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.corpus import stopwords
 from nltk.help import upenn_tagset
 
 
@@ -31,13 +32,13 @@ def pos(tokens, language="eng"):
 
 def stemmer(tokens):
     stemmed = []
-    portStemmer = PorterStemmer()
+    port_stemmer = PorterStemmer()
     print("---Stemming---")
 
     for t in tokens:
         sentence = []
         for w in t:
-            s = portStemmer.stem(w)
+            s = port_stemmer.stem(w)
             sentence.append(s)
             print(w, " ==> ", s)
 
@@ -63,3 +64,16 @@ def lemmer(tokens):
 
     print("Lemmed:", lemmed)
     return lemmed
+
+
+def remove_stopwords(tokens, language="english"):
+    stopwords_removed = []
+    stopwords_list = stopwords.words(language)
+    print("Stopwords in", language, ":", stopwords_list)
+    print("---Removing Stopwords---")
+
+    for t in tokens:
+        stopwords_removed.append([word for word in t if word not in stopwords_list])
+
+    print("Stopwords removed:", stopwords_removed)
+    return stopwords_removed
