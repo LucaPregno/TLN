@@ -1,17 +1,25 @@
 # nltk.download()
-from Translation.Utility import tokenize, stemmer, pos, lemmer, remove_stopwords
-from nltk import pos_tag, word_tokenize
-from nltk import sent_tokenize
+from nltk import ne_chunk
+from nltk.corpus import treebank
+import Translation.Parser as parserLib
 
 
 def main():
-    sentence_list = ["Paolo loves Francesca", "You are imagining things", "the man who likes skating"]
-    print("Sentence list:", sentence_list)
-    tokenized = tokenize(sentence_list)
-    tagged = pos(tokenized)
-    stemmed = stemmer(tokenized)
-    lemmed = lemmer(tokenized)
-    stopwords_removed = remove_stopwords(tokenized)
+    # sentence_list = ["Paolo loves Francesca", "You are imagining things", "the man who likes skating"]
+    # print("Sentence list:", sentence_list)
+    # tokenized = parserLib.tokenize(sentence_list)
+    # tagged = parserLib.pos(tokenized)
+    # stemmed = parserLib.stemmer(tokenized)
+    # lemmed = parserLib.lemmer(tokenized)
+    # stopwords_removed = parserLib.remove_stopwords(tokenized)
+    # entities = parserLib.chunking(tagged)
+    # print(entities)
+    # t = treebank.parsed_sents('wsj_0001.mrg')[0]
+    # t.draw()
+    sentence_list = ('È la spada laser',
+                     'Ha fatto una mossa leale',
+                     'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via ')
+    parserLib.parsing(sentence_list)
 
 
 if __name__ == '__main__':

@@ -1,5 +1,4 @@
-from nltk import sent_tokenize
-from nltk import pos_tag, word_tokenize
+from nltk import pos_tag, word_tokenize, ne_chunk, load, sent_tokenize, RecursiveDescentParser
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.help import upenn_tagset
@@ -12,7 +11,7 @@ def tokenize(phrases, language="english"):
 
     print("---Tokenization---")
     for i in range(len(tokenized)):
-        print("Sentence ", i, "tokenized ", tokenized[i])
+        print("Sentence", i, "tokenized", tokenized[i])
 
     return tokenized
 
@@ -25,7 +24,7 @@ def pos(tokens, language="eng"):
     print("---PoS Tagging---")
     # print(upenn_tagset()) # show tag meanings
     for i in range(len(tagged)):
-        print("Sentence ", i, "tagged ", tagged[i])
+        print("Sentence", i, "tagged", tagged[i])
 
     return tagged
 
@@ -77,3 +76,30 @@ def remove_stopwords(tokens, language="english"):
 
     print("Stopwords removed:", stopwords_removed)
     return stopwords_removed
+
+
+def chunking(tagged):
+    entities = []
+    for i in range(len(tagged)):
+        entities.append(ne_chunk(tagged[i]))
+
+    print("---Chunking---")
+    for i in range(len(entities)):
+        print("Sentence", i, "chunk", entities[i])
+
+    return tagged
+
+
+def parsing(phrases, grammar=load('file:grammar.cfg')):
+    rd = RecursiveDescentParser(grammar)
+    parsing_tree = []
+    print("---Parsing---")
+    for i in range(len(phrases)):
+        print("Sentence", i, ":", phrases[i])
+        sentence = phrases[i].split()
+        tree = rd.parse(sentence)
+        print("Parsing tree:")
+        for t in tree:
+            print(t)
+        print("------------------")
+        parsing_tree.append(tree)
