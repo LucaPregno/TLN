@@ -1,6 +1,4 @@
 # nltk.download()
-from nltk import ne_chunk
-from nltk.corpus import treebank
 import Translation.Parser as parserLib
 
 
@@ -16,9 +14,9 @@ def main():
     # print(entities)
     # t = treebank.parsed_sents('wsj_0001.mrg')[0]
     # t.draw()
-    sentence_list = ('È la spada laser',
+    sentence_list = ('È la spada laser di tuo padre',
                      'Ha fatto una mossa leale',
-                     'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via ')
+                     'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via')
     parserLib.parsing(sentence_list)
 
 
