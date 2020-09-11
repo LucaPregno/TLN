@@ -1,4 +1,4 @@
-from nltk import pos_tag, word_tokenize, ne_chunk, load, sent_tokenize, RecursiveDescentParser
+from nltk import pos_tag, word_tokenize, ne_chunk, load, sent_tokenize, RecursiveDescentParser, Tree
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.help import upenn_tagset
@@ -90,16 +90,79 @@ def chunking(tagged):
     return tagged
 
 
+def print_grammar_rules(grammar=load('file:grammar.cfg')):
+    print("Grammar Rules")
+    for p in grammar.productions():
+        print(p)
+
+
+dictionary = {
+    "Repubblica": "Repubblica",
+    "il": "the",
+    "la": "the",
+    "tuo": "your",
+    "Gli": "the",
+    "spada": "sword",
+    "padre": "father",
+    "mossa": "move",
+    "avanzi": "leftovers",
+    "leale": "loyal",
+    "ultimi": "last",
+    "vecchia": "old",
+    "laser": "laser",
+    "È": "Is",
+    "è": "is",
+    "fatto": "done",
+    "spazzati": "swept",
+    "Ha": "Has",
+    "sono": "are",
+    "stati": "been",
+    "via": "away",
+    "in": "in",
+    "su": "on",
+    "da": "by",
+    "con": "with",
+    "di": "of",
+    "della": "of",
+    "cane": "dog",
+    "gatto": "cat",
+    "rincorre": "chased"
+}
+
+
 def parsing(phrases, grammar=load('file:grammar.cfg')):
     rd = RecursiveDescentParser(grammar)
-    parsing_tree = []
     print("---Parsing---")
     for i in range(len(phrases)):
         print("Sentence", i, ":", phrases[i])
         sentence = phrases[i].split()
         tree = rd.parse(sentence)
         print("Parsing tree:")
-        for t in tree:
-            print(t)
+        get_leaf(tree)
         print("------------------")
-        parsing_tree.append(tree)
+
+
+def get_leaf(tree):
+    for index, subtree in enumerate(tree):
+        if type(subtree) == Tree and subtree.label() == 'PropN':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'Det':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'N':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'Adj':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'V':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'Aux':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'Adv':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'P':
+            print(subtree.label())
+        elif type(subtree) == Tree and subtree.label() == 'ADP':
+            print(subtree.label())
+
+        if type(subtree) == Tree:
+            get_leaf(subtree)
+
