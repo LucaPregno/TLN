@@ -1,5 +1,5 @@
 # nltk.download()
-import Translation.Parser as parserLib
+import Translation.parser as parser_lib
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
                      'Ha fatto una mossa leale',
                      'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via',
                      'spazzati via')
-    parserLib.parsing(sentence_list)
+    parser_lib.parsing(sentence_list)
     # parserLib.print_grammar_rules()
 
 

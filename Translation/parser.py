@@ -1,7 +1,7 @@
 from nltk import pos_tag, word_tokenize, ne_chunk, load, sent_tokenize, RecursiveDescentParser, Tree
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.corpus import stopwords
-from nltk.help import upenn_tagset
+import Translation.grammars.utility as grammar_utility
 
 
 def tokenize(phrases, language="english"):
@@ -90,16 +90,11 @@ def chunking(tagged):
     return tagged
 
 
-def print_grammar_rules(grammar=load('file:grammar.cfg')):
-    print("Grammar Rules")
-    for p in grammar.productions():
-        print(p)
-
-
 dictionary = {
     "Repubblica": "Repubblica",
     "il": "the",
     "la": "the",
+    "una": "a",
     "tuo": "your",
     "Gli": "the",
     "spada": "sword",
@@ -130,7 +125,7 @@ dictionary = {
 }
 
 
-def parsing(phrases, grammar=load('file:grammar.cfg')):
+def parsing(phrases, grammar=load(grammar_utility.grammar_url)):
     rd = RecursiveDescentParser(grammar)
     print("---Parsing---")
     for i in range(len(phrases)):
@@ -138,31 +133,31 @@ def parsing(phrases, grammar=load('file:grammar.cfg')):
         sentence = phrases[i].split()
         tree = rd.parse(sentence)
         print("Parsing tree:")
-        get_leaf(tree)
+        en_tree = parse_tree_to_sentence_plan(tree)
+        print("FINEEE")
+        for t in en_tree:
+            print(t)
         print("------------------")
 
 
-def get_leaf(tree):
-    for index, subtree in enumerate(tree):
-        if type(subtree) == Tree and subtree.label() == 'PropN':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'Det':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'N':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'Adj':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'V':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'Aux':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'Adv':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'P':
-            print(subtree.label())
-        elif type(subtree) == Tree and subtree.label() == 'ADP':
-            print(subtree.label())
+def parse_tree_to_sentence_plan(tree):
+    pos_tagging = []
+    for t in tree:
+        print("Tree before", t)
+        for position in t.treepositions('leaves'):
+            t[position] = dictionary[t[position]]
+        print("Tree after", t)
+        pos_tagging = t.pos()
 
-        if type(subtree) == Tree:
-            get_leaf(subtree)
+    print(pos_tagging)
+
+    for t in tree:
+        print("Nuovo", t)
+    # for index, subtree in enumerate(tree):
+    #     print("Tipo", type(subtree), "label", subtree.label())
+    #     if type(subtree) == Tree and subtree.label() in lhs_list:
+    #         print("sub", subtree[0])
+    #         subtree[0] = dictionary[subtree[0]]
+
+    return tree
 
