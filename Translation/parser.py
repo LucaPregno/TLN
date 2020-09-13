@@ -90,7 +90,7 @@ def chunking(tagged):
     return tagged
 
 
-dictionary = {
+translation_dictionary = {
     "Repubblica": "Repubblica",
     "il": "the",
     "la": "the",
@@ -140,24 +140,20 @@ def parsing(phrases, grammar=load(grammar_utility.grammar_url)):
         print("------------------")
 
 
-def parse_tree_to_sentence_plan(tree):
+def parse_tree_to_sentence_plan(parsed_tree):
     pos_tagging = []
-    for t in tree:
+    tree = []
+    for t in parsed_tree:
+        tree = t
         print("Tree before", t)
         for position in t.treepositions('leaves'):
-            t[position] = dictionary[t[position]]
+            t[position] = translation_dictionary[t[position]]
         print("Tree after", t)
         pos_tagging = t.pos()
 
     print(pos_tagging)
 
-    for t in tree:
-        print("Nuovo", t)
-    # for index, subtree in enumerate(tree):
-    #     print("Tipo", type(subtree), "label", subtree.label())
-    #     if type(subtree) == Tree and subtree.label() in lhs_list:
-    #         print("sub", subtree[0])
-    #         subtree[0] = dictionary[subtree[0]]
+    print("Nuovo", tree)
 
     return tree
 

@@ -20,7 +20,6 @@ def main():
                      'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via',
                      'spazzati via')
     parser_lib.parsing(sentence_list)
-    # parserLib.print_grammar_rules()
 
 
 if __name__ == '__main__':
