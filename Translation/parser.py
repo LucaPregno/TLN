@@ -91,12 +91,12 @@ def chunking(tagged):
 
 
 translation_dictionary = {
-    "Repubblica": "Repubblica",
+    "Repubblica": "Republic",
     "il": "the",
     "la": "the",
     "una": "a",
     "tuo": "your",
-    "Gli": "the",
+    "Gli": "The",
     "spada": "sword",
     "padre": "father",
     "mossa": "move",
@@ -110,7 +110,7 @@ translation_dictionary = {
     "fatto": "done",
     "spazzati": "swept",
     "Ha": "Has",
-    "sono": "are",
+    "sono": "have",
     "stati": "been",
     "via": "away",
     "in": "in",
@@ -127,20 +127,20 @@ translation_dictionary = {
 
 def parsing(phrases, grammar=load(grammar_utility.grammar_url)):
     rd = RecursiveDescentParser(grammar)
+    tree_list = []
     print("---Parsing---")
     for i in range(len(phrases)):
         print("Sentence", i, ":", phrases[i])
         sentence = phrases[i].split()
         tree = rd.parse(sentence)
+        # tree.draw()
         print("Parsing tree:")
-        en_tree = parse_tree_to_sentence_plan(tree)
-        print("FINEEE")
-        for t in en_tree:
-            print(t)
+        tree_list.append(translate_tree(tree))
         print("------------------")
+    return tree_list
 
 
-def parse_tree_to_sentence_plan(parsed_tree):
+def translate_tree(parsed_tree):
     pos_tagging = []
     tree = []
     for t in parsed_tree:
@@ -148,12 +148,10 @@ def parse_tree_to_sentence_plan(parsed_tree):
         print("Tree before", t)
         for position in t.treepositions('leaves'):
             t[position] = translation_dictionary[t[position]]
-        print("Tree after", t)
         pos_tagging = t.pos()
 
     print(pos_tagging)
-
-    print("Nuovo", tree)
+    print("Tree after", tree)
 
     return tree
 
