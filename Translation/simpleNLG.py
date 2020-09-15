@@ -1,6 +1,6 @@
-import simplenlg as nlg
-from simplenlg import NLGFactory, Realiser, Feature, SPhraseSpec
-from simplenlg.lexicon import Lexicon, Tense
+from simplenlg import NLGFactory, Realiser
+from simplenlg.lexicon import Lexicon
+from Translation.model.word import Word, word_list
 
 
 def example():
@@ -31,11 +31,10 @@ def parse_tree_to_sentence_plan(tree_list):
     nlg_factory = NLGFactory(lexicon)
     realiser = Realiser(lexicon)
 
-    # for tree in tree_list:
-    #     print("------------------")
-    #     print(tree)
-    #     c = nlg_factory.createClause()
-    #     define_sentence_plan(c, nlg_factory, tree)
+    for tree in tree_list:
+        print("------------------")
+        # c = nlg_factory.createClause()
+        # define_sentence_plan(c, nlg_factory, tree)
 
 
 def define_sentence_plan(clause, nlg_factory, tree, phrase=None):
@@ -54,7 +53,7 @@ def define_sentence_plan(clause, nlg_factory, tree, phrase=None):
                 print("SottoVP", s.label(), s[0])
         elif subtree.label() == "PP":
             print(label, value)
-        elif subtree.label() == "Nom":
+        elif subtree.label() == "NOM":
             print(label, value)
         elif subtree.label() == "PropN":
             print(label, value)
@@ -71,7 +70,28 @@ def define_sentence_plan(clause, nlg_factory, tree, phrase=None):
             print(label, value)
         elif subtree.label() == "Adv":
             print(label, value)
-        elif subtree.label() == "P":
+        elif subtree.label() == "Prep":
             print(label, value)
-        elif subtree.label() == "ADP":
+        elif subtree.label() == "Adp":
             print(label, value)
+
+
+def sentence_planning(tree_list):
+    lexicon = Lexicon.getDefaultLexicon()
+    nlg_factory = NLGFactory(lexicon)
+    realiser = Realiser(lexicon)
+
+    for tree in tree_list:
+        print("------------")
+        pos_tag = tree.pos()
+        # matches_verb = (v for v in pos_tag if v[0] == "V")
+        # print("m", matches_verb)
+        for p in pos_tag:
+            if p[1] == "V":
+                v = Word(p[0], p[1], pos_tag.index((p[0], p[1])))
+                v.print()
+            if p[1] == "N":
+                n_index_list = [i for i, n in enumerate(pos_tag) if n == "N"]
+                n_word_list = word_list(n_index_list, value=p[0], tag=p[1])
+
+

@@ -150,7 +150,7 @@ def translate_tree(parsed_tree):
             t[position] = translation_dictionary[t[position]]
         pos_tagging = t.pos()
 
-    print(pos_tagging)
+    # print(pos_tagging)
     print("Tree after", tree)
 
     return tree
