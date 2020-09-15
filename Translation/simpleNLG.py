@@ -1,5 +1,7 @@
 from simplenlg import NLGFactory, Realiser
 from simplenlg.lexicon import Lexicon
+
+from Translation.model.sentece_plan import SentencePlan
 from Translation.model.word import Word, word_list
 
 
@@ -31,49 +33,72 @@ def parse_tree_to_sentence_plan(tree_list):
     nlg_factory = NLGFactory(lexicon)
     realiser = Realiser(lexicon)
 
+    # define_sentence_plan(tree_list[2], SentencePlan())
+
     for tree in tree_list:
         print("------------------")
-        # c = nlg_factory.createClause()
-        # define_sentence_plan(c, nlg_factory, tree)
+        define_sentence_plan(tree, SentencePlan())
 
 
-def define_sentence_plan(clause, nlg_factory, tree, phrase=None):
+def define_sentence_plan(tree, sentence_plan):
+
+    root_h = tree.height()
+    print("root", root_h)
+
+    # if there is no subject force it to "It"
+    if len(tree) == 1:
+        sentence_plan.subj = "It"
 
     for subtree in tree.subtrees():
-
+        n_subtree = len(subtree)
         label = subtree.label()
         value = subtree[0]
+        h = subtree.height()
+        print("label", subtree.label(), "value", value, "h", h)
         if subtree.label() == "NP":
-            print(label, value)
-            nlg_factory.createNounPhrase()
+            # If there is a subject in the sentence
+            #AGGIUNGO AL SOGGETTO
+            if sentence_plan.subj != "":
+                print(label, value)
+                if subtree.label() == "Det":
+                    print(label, value)
+                elif subtree.label() == "N":
+                    print(label, value)
+                elif subtree.label() == "Adj":
+                    print(label, value)
+            else: # AGGIUNGO PP
+                if subtree.label() == "Det":
+                    print(label, value)
+                elif subtree.label() == "N":
+                    print(label, value)
+                elif subtree.label() == "Adj":
+                    print(label, value)
+
         elif subtree.label() == "VP":
-            print(label, value)
-            v_phrase = nlg_factory.createVerbPhrase()
-            for s in subtree.subtrees():
-                print("SottoVP", s.label(), s[0])
+            # COMPLEMENTO OGGETTO
+            print(label, value, h)
+            # for s in subtree.subtrees():
+            #     print("SottoVP", s.label(), s[0])
         elif subtree.label() == "PP":
             print(label, value)
         elif subtree.label() == "NOM":
             print(label, value)
         elif subtree.label() == "PropN":
             print(label, value)
-        elif subtree.label() == "Det":
-            print(label, value)
-        elif subtree.label() == "N":
-            print(label, value)
-            #nlg_factory.setSub
-        elif subtree.label() == "Adj":
-            print(label, value)
-        elif subtree.label() == "V":
-            print(label, value)
-        elif subtree.label() == "Aux":
-            print(label, value)
-        elif subtree.label() == "Adv":
-            print(label, value)
-        elif subtree.label() == "Prep":
-            print(label, value)
         elif subtree.label() == "Adp":
             print(label, value)
+        elif subtree.label() == "V":
+            sentence_plan.verb += value
+            sentence_plan.verb += " "
+        elif subtree.label() == "Aux":
+            sentence_plan.verb += value
+            sentence_plan.verb += " "
+        elif subtree.label() == "Adv":
+            sentence_plan.verb += value
+            sentence_plan.verb += " "
+
+    print("--------------------")
+    sentence_plan.print()
 
 
 def sentence_planning(tree_list):

@@ -10,7 +10,6 @@ def main():
     tree_list = parser_lib.parsing(sentence_list)
     simpleNLG.example()
     simpleNLG.parse_tree_to_sentence_plan(tree_list)
-
     # for t in tree_list:
     #     t.draw()
 
