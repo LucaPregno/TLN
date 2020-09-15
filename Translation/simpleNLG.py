@@ -1,7 +1,7 @@
 from simplenlg import NLGFactory, Realiser
 from simplenlg.lexicon import Lexicon
 
-from Translation.model.sentece_plan import SentencePlan
+from Translation.model.sentece_plan import SentencePlan, Object
 from Translation.model.word import Word, word_list
 
 
@@ -37,11 +37,11 @@ def parse_tree_to_sentence_plan(tree_list):
 
     for tree in tree_list:
         print("------------------")
-        define_sentence_plan(tree, SentencePlan())
+        define_sentence_plan(tree)
 
 
-def define_sentence_plan(tree, sentence_plan):
-
+def define_sentence_plan(tree):
+    sentence_plan = SentencePlan()
     root_h = tree.height()
     print("root", root_h)
 
@@ -58,7 +58,7 @@ def define_sentence_plan(tree, sentence_plan):
         if subtree.label() == "NP":
             # If there is a subject in the sentence
             #AGGIUNGO AL SOGGETTO
-            if sentence_plan.subj != "":
+            if sentence_plan.subject != "":
                 print(label, value)
                 if subtree.label() == "Det":
                     print(label, value)
