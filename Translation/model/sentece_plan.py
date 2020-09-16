@@ -22,11 +22,11 @@ class Object:
 class Preposition:
     def __init__(self, value=""):
         self.value = value
-        self.obj = Object()
+        self.object = Object()
 
     def print(self):
         self.print_value()
-        self.obj.print()
+        self.object.print()
 
     def print_value(self):
         print("Preposition value", self.value)

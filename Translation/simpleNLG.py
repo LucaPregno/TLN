@@ -107,6 +107,7 @@ def define_sentence_plan(tree):
 def deep_search(tree, sentence_plan):
     frontier = tree
     len_frontier = len(frontier)
+    father = ""
     if len_frontier == 1:
         sentence_plan.subject.value = "It"
 
@@ -115,6 +116,10 @@ def deep_search(tree, sentence_plan):
         # print("frontier", frontier)
         # print("label", subtree.label(), "value", subtree)
         subtree = frontier.pop()
+        if subtree.label() in ["VP", "NP", "PP"]:
+            father = subtree.label()
+        print("FATHER", father)
+
         if subtree.label() == "V":
             sentence_plan.verb += subtree[0]
             sentence_plan.verb += " "
@@ -124,20 +129,31 @@ def deep_search(tree, sentence_plan):
         elif subtree.label() == "Adv":
             sentence_plan.verb += subtree[0]
             sentence_plan.verb += " "
-        elif sentence_plan.subject.value == "" and subtree.label() != "PP":
+        # searching the subject
+        elif sentence_plan.subject.value == "" and father == "NP":
             if subtree.label() == "Det":
                 sentence_plan.subject.determiner.append(subtree[0])
             elif subtree.label() == "N":
                 sentence_plan.subject.value = subtree[0]
             elif subtree.label() == "Adj":
                 sentence_plan.subject.adjective.append(subtree[0])
-        elif sentence_plan.subject.value != "" and subtree.label() != "PP":
+        # searching the complement
+        elif sentence_plan.subject.value != "" and father == "NP":
             if subtree.label() == "Det":
                 sentence_plan.object.determiner.append(subtree[0])
             elif subtree.label() == "N":
                 sentence_plan.object.value = subtree[0]
             elif subtree.label() == "Adj":
                 sentence_plan.object.adjective.append(subtree[0])
+        elif father == "PP":
+            if subtree.label() == "N":
+                sentence_plan.preposition.value = subtree[0]
+            elif subtree.label() == "Det":
+                sentence_plan.preposition.object.determiner.append(subtree[0])
+            elif subtree.label() == "PropN":
+                sentence_plan.preposition.value = subtree[0]
+            elif subtree.label() == "Adp":
+                sentence_plan.preposition.object.determiner.append(subtree[0])
 
         for i in reversed(range(len(subtree))):
             if type(subtree[i]) != str:
