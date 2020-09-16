@@ -29,7 +29,7 @@ class Preposition:
         self.object.print()
 
     def print_value(self):
-        print("Preposition value", self.value)
+        print("Preposition value:", self.value)
 
 
 class SentencePlan:
@@ -41,17 +41,22 @@ class SentencePlan:
 
     def print(self):
         print("---Subject---")
-        self.print_subj()
+        self.print_subject()
         print("---Verb---")
         self.print_verb()
         print("---Object---")
-        self.print_obj()
+        self.print_object()
+        print("---Preposition---")
+        self.print_preposition()
 
-    def print_subj(self):
+    def print_subject(self):
         self.subject.print()
 
     def print_verb(self):
         print("Value:", self.verb)
 
-    def print_obj(self):
+    def print_object(self):
         self.object.print()
+
+    def print_preposition(self):
+        self.preposition.print()
