@@ -7,9 +7,9 @@ from Translation.model.sentece_plan import SentencePlan
 def main():
     sentence_list = ('È la spada laser di tuo padre',
                      'Ha fatto una mossa leale',
-                     'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via')
+                     'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via',
+                     'È una mossa di tuo padre')
     tree_list = parser_lib.parsing(sentence_list)
-    simpleNLG.example()
     simpleNLG.parse_tree_to_sentence_plan(tree_list)
     # for t in tree_list:
     #     t.draw()

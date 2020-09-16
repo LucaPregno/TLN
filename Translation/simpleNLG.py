@@ -9,34 +9,12 @@ lexicon = Lexicon.getDefaultLexicon()
 nlg_factory = NLGFactory(lexicon)
 realiser = Realiser(lexicon)
 
-def example():
-    lexicon = Lexicon.getDefaultLexicon()
-    nlg_factory = NLGFactory(lexicon)
-    realiser = Realiser(lexicon)
-
-    p = nlg_factory.createClause()
-    my_dog = nlg_factory.createNounPhrase("dog")
-    my_dog.setDeterminer("my")
-    p.setSubject(my_dog)
-    p.setVerb("chase")
-    obj = nlg_factory.createAdjectivePhrase("clean")
-    obj.addComplement("car")
-    obj.addComplement("bike")
-    p.addComplement(obj)
-    possession = nlg_factory.createPrepositionPhrase()
-    possession.setPreposition("of")
-    f = nlg_factory.createNounPhrase("father")
-    f.setDeterminer("your")
-    possession.addComplement(f)
-    p.addComplement(possession)
-    print(realiser.realiseSentence(p))
-
 
 def parse_tree_to_sentence_plan(tree_list):
     for tree in tree_list:
-        print("------------------")
         sentence_plan = sentence_plan_build(tree)
         launch_simpleNLG(sentence_plan)
+        print("------------------")
 
 
 def sentence_plan_build(tree):
@@ -117,27 +95,16 @@ def sentence_plan_build(tree):
 
 def launch_simpleNLG(sentence_plan):
     c = nlg_factory.createClause()
-    # np = nlg_factory.createNounPhrase(sentence_plan.subject.value)
-    # for d in sentence_plan.subject.determiner:
-    #     np.setDeterminer(d)
-    # for a in sentence_plan.subject.adjective:
-    #     np.addModifier(a)
     np = realizer_object(sentence_plan.subject)
     c.setSubject(np)
     c.setVerb(sentence_plan.verb)
-    # complement = nlg_factory.createNounPhrase(sentence_plan.object.value)
-    # for d in sentence_plan.object.determiner:
-    #     complement.setDeterminer(d)
-    # for a in sentence_plan.object.adjective:
-    #     complement.addModifier(a)
     complement = realizer_object(sentence_plan.object)
     c.addComplement(complement)
-
     print(realiser.realiseSentence(c))
 
 
 def realizer_object(obj):
-    obj.print()
+    # obj.print()
     np = nlg_factory.createNounPhrase(obj.value)
     for d in obj.determiner:
         np.setDeterminer(d)
