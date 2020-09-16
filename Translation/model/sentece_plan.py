@@ -1,13 +1,15 @@
 class Object:
-    def __init__(self, value="",):
+    def __init__(self, value=""):
         self.value = value
         self.determiner = []
         self.adjective = []
+        self.preposition = Preposition()
 
     def print(self):
         self.print_value()
         self.print_determiner()
         self.print_adjective()
+        self.preposition.print()
 
     def print_value(self):
         print("Value:", self.value)
@@ -22,14 +24,28 @@ class Object:
 class Preposition:
     def __init__(self, value=""):
         self.value = value
-        self.object = Object()
+        self.object = ""
+        self.determiner = []
+        self.adjective = []
 
     def print(self):
+        print("-Preposition-")
         self.print_value()
-        self.object.print()
+        self.print_object()
+        self.print_determiner()
+        self.print_adjective()
 
     def print_value(self):
         print("Preposition value:", self.value)
+
+    def print_object(self):
+        print("Object:", self.object)
+
+    def print_determiner(self):
+        print("Determiner:", self.determiner)
+
+    def print_adjective(self):
+        print("Adjective:", self.adjective)
 
 
 class SentencePlan:
@@ -37,7 +53,6 @@ class SentencePlan:
         self.subject = Object()
         self.verb = verb
         self.object = Object()
-        self.preposition = Preposition()
 
     def print(self):
         print("---Subject---")
@@ -46,8 +61,6 @@ class SentencePlan:
         self.print_verb()
         print("---Object---")
         self.print_object()
-        print("---Preposition---")
-        self.print_preposition()
 
     def print_subject(self):
         self.subject.print()
@@ -58,5 +71,3 @@ class SentencePlan:
     def print_object(self):
         self.object.print()
 
-    def print_preposition(self):
-        self.preposition.print()

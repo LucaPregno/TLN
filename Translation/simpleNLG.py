@@ -5,6 +5,9 @@ from Translation.model.father import Father
 from Translation.model.sentece_plan import SentencePlan, Object
 from Translation.model.word import Word, word_list
 
+lexicon = Lexicon.getDefaultLexicon()
+nlg_factory = NLGFactory(lexicon)
+realiser = Realiser(lexicon)
 
 def example():
     lexicon = Lexicon.getDefaultLexicon()
@@ -33,9 +36,7 @@ def parse_tree_to_sentence_plan(tree_list):
     for tree in tree_list:
         print("------------------")
         sentence_plan = sentence_plan_build(tree)
-        # sentence_plan.print()
         launch_simpleNLG(sentence_plan)
-
 
 
 def sentence_plan_build(tree):
@@ -57,7 +58,7 @@ def sentence_plan_build(tree):
                 father.set(subtree.height(), subtree.label())
 
         if subtree.label() == "V":
-            sentence_plan.verb += subtree[0]
+            sentence_plan.verb += str(subtree[0])
             sentence_plan.verb += " "
         elif subtree.label() == "Aux":
             sentence_plan.verb += subtree[0]
@@ -81,18 +82,30 @@ def sentence_plan_build(tree):
                 sentence_plan.object.value = subtree[0]
             if subtree.label() == "Adj":
                 sentence_plan.object.adjective.append(subtree[0])
-        # serching the prepositions
-        elif father.label == "PP":
+        # searching the prepositions referring to subject
+        elif father.label == "PP" and sentence_plan.subject.value != ("" or "It"):
             if subtree.label() == "N":
-                sentence_plan.preposition.object.value = subtree[0]
+                sentence_plan.subject.preposition.object = subtree[0]
             elif subtree.label() == "Det":
-                sentence_plan.preposition.object.determiner.append(subtree[0])
+                sentence_plan.subject.preposition.determiner.append(subtree[0])
             elif subtree.label() == "PropN":
-                sentence_plan.preposition.object.value = subtree[0]
+                sentence_plan.subject.preposition.object = subtree[0]
             elif subtree.label() == "Adp":
-                sentence_plan.preposition.value = subtree[0]
+                sentence_plan.subject.preposition.value = subtree[0]
             elif subtree.label() == "Adj":
-                sentence_plan.preposition.object.adjective.append(subtree[0])
+                sentence_plan.subject.preposition.adjective.append(subtree[0])
+        # searching the prepositions referring to complement
+        elif father.label == "PP" and sentence_plan.object.value != "":
+            if subtree.label() == "N":
+                sentence_plan.object.preposition.object = subtree[0]
+            elif subtree.label() == "Det":
+                sentence_plan.object.preposition.determiner.append(subtree[0])
+            elif subtree.label() == "PropN":
+                sentence_plan.object.preposition.object = subtree[0]
+            elif subtree.label() == "Adp":
+                sentence_plan.object.preposition.value = subtree[0]
+            elif subtree.label() == "Adj":
+                sentence_plan.object.preposition.adjective.append(subtree[0])
 
         for i in reversed(range(len(subtree))):
             if type(subtree[i]) != str:
@@ -103,41 +116,49 @@ def sentence_plan_build(tree):
 
 
 def launch_simpleNLG(sentence_plan):
-    lexicon = Lexicon.getDefaultLexicon()
-    nlg_factory = NLGFactory(lexicon)
-    realiser = Realiser(lexicon)
-
     c = nlg_factory.createClause()
-    NP = nlg_factory.createNounPhrase(sentence_plan.subject.value)
-    for d in sentence_plan.subject.determiner:
-        NP.setDeterminer(d)
-    for a in sentence_plan.subject.adjective:
-        NP.addComplement(nlg_factory.createAdjectivePhrase(a))
-    c.setSubject(NP)
+    # np = nlg_factory.createNounPhrase(sentence_plan.subject.value)
+    # for d in sentence_plan.subject.determiner:
+    #     np.setDeterminer(d)
+    # for a in sentence_plan.subject.adjective:
+    #     np.addModifier(a)
+    np = realizer_object(sentence_plan.subject)
+    c.setSubject(np)
     c.setVerb(sentence_plan.verb)
-
-    OBJ = nlg_factory.createNounPhrase(sentence_plan.object.value)
-    for d in sentence_plan.object.determiner:
-        OBJ.setDeterminer(d)
-    for a in sentence_plan.subject.adjective:
-        OBJ.addComplement(nlg_factory.createAdjectivePhrase(a))
-    c.addComplement(OBJ)
+    # complement = nlg_factory.createNounPhrase(sentence_plan.object.value)
+    # for d in sentence_plan.object.determiner:
+    #     complement.setDeterminer(d)
+    # for a in sentence_plan.object.adjective:
+    #     complement.addModifier(a)
+    complement = realizer_object(sentence_plan.object)
+    c.addComplement(complement)
 
     print(realiser.realiseSentence(c))
 
-    # possession = nlg_factory.createPrepositionPhrase()
-    # possession.setPreposition("of")
-    # f = nlg_factory.createNounPhrase("father")
-    # f.setDeterminer("your")
-    # possession.addComplement(f)
-    # c.addComplement(possession)
+
+def realizer_object(obj):
+    obj.print()
+    np = nlg_factory.createNounPhrase(obj.value)
+    for d in obj.determiner:
+        np.setDeterminer(d)
+    for a in obj.adjective:
+        np.addModifier(a)
+
+    if obj.preposition.value != "":
+        preposition = nlg_factory.createPrepositionPhrase()
+        preposition.setPreposition(obj.preposition.value)
+        p_np = nlg_factory.createNounPhrase(obj.preposition.object)
+        for d in obj.preposition.determiner:
+            p_np.setDeterminer(d)
+        for a in obj.preposition.adjective:
+            p_np.addModifier(a)
+        preposition.addComplement(p_np)
+        np.addComplement(preposition)
+
+    return np
 
 
 def sentence_planning(tree_list):
-    lexicon = Lexicon.getDefaultLexicon()
-    nlg_factory = NLGFactory(lexicon)
-    realiser = Realiser(lexicon)
-
     for tree in tree_list:
         print("------------")
         pos_tag = tree.pos()
