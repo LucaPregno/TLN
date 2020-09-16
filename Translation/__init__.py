@@ -1,6 +1,7 @@
 # nltk.download()
 import Translation.parser as parser_lib
 import Translation.simpleNLG as simpleNLG
+from Translation.model.sentece_plan import SentencePlan
 
 
 def main():

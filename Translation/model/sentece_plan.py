@@ -1,8 +1,8 @@
 class Object:
-    def __init__(self, value="", determiner=[], adjective=[]):
+    def __init__(self, value="",):
         self.value = value
-        self.determiner = determiner
-        self.adjective = adjective
+        self.determiner = []
+        self.adjective = []
 
     def print(self):
         self.print_value()
@@ -20,9 +20,9 @@ class Object:
 
 
 class Preposition:
-    def __init__(self, value="", obj=Object()):
+    def __init__(self, value=""):
         self.value = value
-        self.obj = obj
+        self.obj = Object()
 
     def print(self):
         self.print_value()
@@ -33,22 +33,25 @@ class Preposition:
 
 
 class SentencePlan:
-    def __init__(self, subj=Object(), obj=Object(), verb="", preposition=Preposition()):
-        self.subject = subj
+    def __init__(self, verb=""):
+        self.subject = Object()
         self.verb = verb
-        self.obj = obj
-        self.preposition = preposition
+        self.object = Object()
+        self.preposition = Preposition()
 
     def print(self):
-        self.subject.print()
+        print("---Subject---")
+        self.print_subj()
+        print("---Verb---")
         self.print_verb()
-        self.obj.print()
+        print("---Object---")
+        self.print_obj()
 
     def print_subj(self):
         self.subject.print()
 
     def print_verb(self):
-        print("Verb:", self.verb)
+        print("Value:", self.verb)
 
     def print_obj(self):
-        self.obj.print()
+        self.object.print()
