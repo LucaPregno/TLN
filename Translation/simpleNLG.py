@@ -13,7 +13,7 @@ realiser = Realiser(lexicon)
 def parse_tree_to_sentence_plan(tree_list):
     for tree in tree_list:
         sentence_plan = sentence_plan_build(tree)
-        launch_simpleNLG(sentence_plan)
+        use_simplenlg(sentence_plan)
         print("------------------")
 
 
@@ -93,7 +93,7 @@ def sentence_plan_build(tree):
     return sentence_plan
 
 
-def launch_simpleNLG(sentence_plan):
+def use_simplenlg(sentence_plan):
     c = nlg_factory.createClause()
     np = realizer_object(sentence_plan.subject)
     c.setSubject(np)
@@ -110,7 +110,7 @@ def realizer_object(obj):
         np.setDeterminer(d)
     for a in obj.adjective:
         np.addModifier(a)
-
+    # if there is some preposition referenced to obj
     if obj.preposition.value != "":
         preposition = nlg_factory.createPrepositionPhrase()
         preposition.setPreposition(obj.preposition.value)
