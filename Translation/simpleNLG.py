@@ -35,13 +35,8 @@ def sentence_plan_build(tree):
             else:
                 father.set(subtree.height(), subtree.label())
 
-        if subtree.label() == "V":
-            sentence_plan.verb += str(subtree[0])
-            sentence_plan.verb += " "
-        elif subtree.label() == "Aux":
-            sentence_plan.verb += subtree[0]
-            sentence_plan.verb += " "
-        elif subtree.label() == "Adv":
+        # linked to the verb
+        if subtree.label() in ["V", "Aux", "Adv"]:
             sentence_plan.verb += subtree[0]
             sentence_plan.verb += " "
         # searching the subject
@@ -62,24 +57,20 @@ def sentence_plan_build(tree):
                 sentence_plan.object.adjective.append(subtree[0])
         # searching the prepositions referring to subject
         elif father.label == "PP" and sentence_plan.subject.value != ("" or "It"):
-            if subtree.label() == "N":
+            if subtree.label() in ["N", "PropN"]:
                 sentence_plan.subject.preposition.object = subtree[0]
             elif subtree.label() == "Det":
                 sentence_plan.subject.preposition.determiner.append(subtree[0])
-            elif subtree.label() == "PropN":
-                sentence_plan.subject.preposition.object = subtree[0]
             elif subtree.label() == "Adp":
                 sentence_plan.subject.preposition.value = subtree[0]
             elif subtree.label() == "Adj":
                 sentence_plan.subject.preposition.adjective.append(subtree[0])
         # searching the prepositions referring to complement
         elif father.label == "PP" and sentence_plan.object.value != "":
-            if subtree.label() == "N":
+            if subtree.label() in ["N", "PropN"]:
                 sentence_plan.object.preposition.object = subtree[0]
             elif subtree.label() == "Det":
                 sentence_plan.object.preposition.determiner.append(subtree[0])
-            elif subtree.label() == "PropN":
-                sentence_plan.object.preposition.object = subtree[0]
             elif subtree.label() == "Adp":
                 sentence_plan.object.preposition.value = subtree[0]
             elif subtree.label() == "Adj":
