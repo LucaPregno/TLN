@@ -128,10 +128,11 @@ This is not an easy task but due to the toy grammar we can make some assumption 
 4. if the sentence start with VP there is implied subject (which I assumed is "It")
 
 ### Using simpleNLG
-Here we go, finally we have got the sentence plan and we are ready to use simpleNLG in order to build the english phrase.
+Here we go, finally we have got the sentence plan, hence we are ready to use simpleNLG in order to build the english phrase.
 Now, after define a clause is possible to define subject, verb and complements.
 Before to do that is important to check if they are linked with some determiner adjective or
-prepositional phrase (through the realiser_object method).
+prepositional phrase (through the ```realiser_object``` method).
+
 ![simpleNLG_code](assets/simpleNLG.png)
 
 ## Results
@@ -149,11 +150,10 @@ nouns (which is more "english style" compared to italian). Moreover, decline ver
 the number of the subject (e.g. in my dictionary ```"Ha": "have"``` but simpleNLG decline it using "has").
 
 ### Library
-- [NLTK]
+- [NLTK] Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.
 - [SimpleNLG]
 - [pySimpleNLG]
 - [TINT]
-- Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.
 
 [NLTK]: <https://www.nltk.org/>
 [SimpleNLG]: <https://github.com/simplenlg/simplenlg/wiki>
