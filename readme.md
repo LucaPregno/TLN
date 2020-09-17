@@ -130,7 +130,7 @@ This is not an easy task but due to the toy grammar we can make some assumption 
 ### Using simpleNLG
 Here we go, finally we have got the sentence plan and we are ready to use simpleNLG in order to build the english phrase.
 Now, after define a clause is possible to define subject, verb and complements.
-But before to do that is important to check if they are linked with some determiner adjective or
+Before to do that is important to check if they are linked with some determiner adjective or
 prepositional phrase (through the realiser_object method).
 ![simpleNLG_code](assets/simpleNLG.png)
 
@@ -144,8 +144,8 @@ Now let's see what we got:
 | Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via  | The last leftovers of old Republic has been swept away.  |
 | È una mossa di tuo padre  | It is a move of your father.  |
 
-How we can see simpleNLG not only help us to add punctuation, but move the adjectives before
-nouns (which is more "english style" compared to italian). Moreover decline verbs according to
+As we can see simpleNLG not only help us to add punctuation, but move the adjectives before
+nouns (which is more "english style" compared to italian). Moreover, decline verbs according to
 the number of the subject (e.g. in my dictionary ```"Ha": "have"``` but simpleNLG decline it using "has").
 
 ### Library
