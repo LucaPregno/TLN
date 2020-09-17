@@ -85,8 +85,8 @@ def parsing(phrases, grammar=load(grammar_utility.grammar_url)):
     print("---Parsing---")
     for i in range(len(phrases)):
         print("Sentence", i, ":", phrases[i])
-        sentence = phrases[i].split()
-        tree = rd.parse(sentence)
+        sentence_split = phrases[i].split()
+        tree = rd.parse(sentence_split)
         # tree.draw()
         print("Parsing tree:")
         tree_list.append(translate_tree(tree))
@@ -98,11 +98,14 @@ def translate_tree(parsed_tree):
     tree = []
     for t in parsed_tree:
         tree = t
-        print("Tree before", t)
+        print("Tree before translation")
+        print(t)
         for position in t.treepositions('leaves'):
             t[position] = translation_dictionary[t[position]]
 
-    print("Tree after", tree)
+    print("Tree after translation")
+    tree.draw()
+    print(tree)
 
     return tree
 

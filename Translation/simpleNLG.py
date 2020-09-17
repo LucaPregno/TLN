@@ -86,16 +86,15 @@ def sentence_plan_build(tree):
 
 def use_simplenlg(sentence_plan):
     c = nlg_factory.createClause()
-    np = realizer_object(sentence_plan.subject)
+    np = realiser_object(sentence_plan.subject)
     c.setSubject(np)
     c.setVerb(sentence_plan.verb)
-    complement = realizer_object(sentence_plan.object)
+    complement = realiser_object(sentence_plan.object)
     c.addComplement(complement)
     print(realiser.realiseSentence(c))
 
 
-def realizer_object(obj):
-    # obj.print()
+def realiser_object(obj):
     np = nlg_factory.createNounPhrase(obj.value)
     for d in obj.determiner:
         np.setDeterminer(d)

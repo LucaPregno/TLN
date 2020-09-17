@@ -12,8 +12,6 @@ def main():
                      'È una mossa di tuo padre')
     tree_list = parser_lib.parsing(sentence_list)
     simpleNLG.parse_tree_to_sentence_plan(tree_list)
-    # for t in tree_list:
-    #     t.draw()
 
 
 def nltk_methods():
