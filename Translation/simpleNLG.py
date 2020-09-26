@@ -2,8 +2,7 @@ from simplenlg import NLGFactory, Realiser
 from simplenlg.lexicon import Lexicon
 
 from Translation.model.father import Father
-from Translation.model.sentece_plan import SentencePlan, Object
-from Translation.model.word import Word, word_list
+from Translation.model.sentece_plan import SentencePlan
 
 lexicon = Lexicon.getDefaultLexicon()
 nlg_factory = NLGFactory(lexicon)

@@ -1,4 +1,4 @@
-# Exercise of automatic language processing
+# Syntactic transfer translator exercise
 
 ## Track
 The purpose of this exercise is to create an automatic translator IT (italian) to EN (english)
