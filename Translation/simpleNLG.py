@@ -1,8 +1,8 @@
 from simplenlg import NLGFactory, Realiser
 from simplenlg.lexicon import Lexicon
 
-from Translation.model.father import Father
-from Translation.model.sentece_plan import SentencePlan
+from Translation.Model.father import Father
+from Translation.Model.sentece_plan import SentencePlan
 
 lexicon = Lexicon.getDefaultLexicon()
 nlg_factory = NLGFactory(lexicon)

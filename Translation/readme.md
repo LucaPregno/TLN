@@ -133,7 +133,7 @@ Now, after define a clause is possible to define subject, verb and complements.
 Before to do that is important to check if they are linked with some determiner adjective or
 prepositional phrase (through the ```realiser_object``` method).
 
-![simpleNLG_code](assets/simpleNLG.png)
+![simpleNLG_code](../assets/simpleNLG.png)
 
 ## Results
 Now let's see what we got:

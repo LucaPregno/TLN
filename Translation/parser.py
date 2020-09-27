@@ -2,8 +2,8 @@ from nltk import pos_tag, word_tokenize, ne_chunk, load, RecursiveDescentParser
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 
-import Translation.grammars.utility as grammar_utility
-from Translation.model.dictionary import translation_dictionary
+import Translation.Grammars.utility as grammar_utility
+from Translation.Model.dictionary import translation_dictionary
 
 
 def tokenize(phrases, language="english"):
