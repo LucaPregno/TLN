@@ -25,7 +25,6 @@ def read_and_process():
     df = pd.read_excel(file_path, usecols="B:E")
     df = df.dropna()
     for column in df:
-        print("Column name:", column)
         processed = []
         for data in df[column]:
             processed.append(cleaning(data))
