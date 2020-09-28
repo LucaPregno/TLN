@@ -9,6 +9,8 @@ def main():
     if x == 1:
         exercise1()
 
+    print("\n")
+
 
 if __name__ == '__main__':
     main()
