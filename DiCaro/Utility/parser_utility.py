@@ -1,6 +1,8 @@
 from nltk import pos_tag, word_tokenize, WordNetLemmatizer, PorterStemmer
 from nltk.corpus import stopwords
 
+LEMMER = "lemmer"
+STEMMER = "stemmer"
 punctuation = {',', ';', '(', ')', '{', '}', ':', '?', '!', '.', "'s"}
 
 
@@ -46,3 +48,11 @@ def rm_stopwords_punctuation(sentence, language="english", stamp=False):
         print("Stopwords in", language, ":", stopwords_list)
         print("Sentence with stopwords and punctuation removed:\n", filtered)
     return filtered
+
+
+def cleaning(sentence: str, method: str):
+    tokenized = rm_stopwords_punctuation(sentence)
+    if method == LEMMER:
+        return lemmer(tokenized)
+    else:
+        return stemmer(tokenized)
