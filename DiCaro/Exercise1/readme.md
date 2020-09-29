@@ -10,7 +10,9 @@
 ## Loading data & Preprocessing
 In the first step I just loaded definizioni.xlsx file using panda.
 After that I just cleaned the definition retrieved using the methods ```rm_stopwords_punctuation``` 
-(in order to remove stopwords and punctuation ) and ```lemmer```  (which extract the lemma of the given words).
+(in order to remove stopwords and punctuation ) and then used two alternatives: 
+- ```stemmer```: process in order to crop words and extract their root;
+- ```lemmer```: which extract the lemma of the given words using a slower but more precise way.
 The processing result are saved into a dictionary, which have four elements. Each element is the list of the definitions
 extracted and processed.
 
@@ -32,11 +34,22 @@ After that compute the average of every column definition.
 ## Results
 Now we can see the result aggregate on two dimensions (generic/specific).
 
+For the Lemmer alternative:
+
 |  | Concrete | Abstract |
 | ---------| -------- | -------- |
-| Generic  |   0.23   |   0.13   |
-| Specific |   0.18   |   0.13   |
+| Generic  |   0.26   |   0.13   |
+| Specific |   0.19   |   0.12   |
+
+For the Stemmer alternative:
+
+|  | Concrete | Abstract |
+| ---------| -------- | -------- |
+| Generic  |   0.29   |   0.14   |
+| Specific |   0.20   |   0.19   |
 
 We can notice how concrete words have higher score then abstract, this means that concrete words definitions are more similar.
-Looking on other dimension generic seems to win, but there is a shorter gap (we can apply the same reasoning and
-deduce generic words are more similar each other than specific ones).
+About concrete dimension we can notice generic words are more similar each other than specific ones, but this trend seems
+to invert when we look to abstract words.
+Summing up concrete words have more similar definition when we talk about generic, but abstract have higher similar score
+when we look on specific words.

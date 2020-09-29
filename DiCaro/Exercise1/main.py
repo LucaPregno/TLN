@@ -8,26 +8,34 @@ CONCRETE_G = "concrete_generic"
 CONCRETE_S = "concrete_specific"
 ABSTRACT_G = "abstract_generic"
 ABSTRACT_S = "abstract_specific"
+LEMMER = "lemmer"
+STEMMER = "stemmer"
 
 
 def main():
-    table = read_and_process()
+    df = pd.read_excel(file_path, usecols="B:E").fillna("o")
+    print("Using Lemmer")
+    table = process(df, LEMMER)
+    compute_similarity(table)
+    print("Using Stemmer")
+    table = process(df, STEMMER)
     compute_similarity(table)
 
 
-def read_and_process():
+def process(df, clean_method: str):
     value_table = {
         CONCRETE_G: [],
         CONCRETE_S: [],
         ABSTRACT_G: [],
         ABSTRACT_S: []
     }
-    df = pd.read_excel(file_path, usecols="B:E")
-    df = df.dropna()
     for column in df:
         processed = []
         for data in df[column]:
-            processed.append(cleaning(data))
+            cleaned = cleaning(data, clean_method)
+            if len(cleaned) == 0:
+                continue
+            processed.append(cleaned)
 
         if "concreto_generico" in column:
             value_table[CONCRETE_G] = processed.copy()
@@ -40,6 +48,9 @@ def read_and_process():
     return value_table
 
 
-def cleaning(sentence: str):
+def cleaning(sentence: str, method: str):
     tokenized = parser.rm_stopwords_punctuation(sentence)
-    return parser.lemmer(tokenized)
+    if method == LEMMER:
+        return parser.lemmer(tokenized)
+    else:
+        return parser.stemmer(tokenized)

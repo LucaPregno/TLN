@@ -20,6 +20,22 @@ def lemmer(tokens, stamp=False):
     return lemmed
 
 
+def stemmer(tokens, stamp=False):
+    stemmed = set()
+    stemmer = PorterStemmer()
+    if stamp:
+        print("---Stemming---")
+        for i, t in enumerate(tokens):
+            l = stemmer.stem(t)
+            stemmed.add(l)
+            print(t, " ==> ", l)
+        print("Stemmed:", stemmed)
+    else:
+        for t in tokens:
+            stemmed.add(stemmer.stem(t))
+    return stemmed
+
+
 def rm_stopwords_punctuation(sentence, language="english", stamp=False):
     sentence = set(word_tokenize(sentence))
     stopwords_list = set(stopwords.words(language))
