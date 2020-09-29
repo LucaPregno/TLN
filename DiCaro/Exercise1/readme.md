@@ -1,4 +1,5 @@
-#Concept Similarity (Exercise 1)
+
+# Concept Similarity (Exercise 1)
 
 ## Requirement
 1. Loading definition data
@@ -13,7 +14,7 @@ After that I just cleaned the definition retrieved using the methods ```rm_stopw
 The processing result are saved into a dictionary, which have four elements. Each element is the list of the definitions
 extracted and processed.
 
-##Similarity & Aggregation
+## Similarity & Aggregation
 In order to compute the similarity between each set of every processed definitions I simply used the 
 intersection normalized between minimum of the set cardinality.
 ```
@@ -28,10 +29,10 @@ for i, definition1 in enumerate(value_table[elem]):
 ```
 After that compute the average of every column definition.
 
-##Results
+## Results
 Now we can see the result aggregate on two dimensions (generic/specific).
 
-| -------- | Concrete | Abstract |
+|  | Concrete | Abstract |
 | ---------| -------- | -------- |
 | Generic  |   0.23   |   0.13   |
 | Specific |   0.18   |   0.13   |
