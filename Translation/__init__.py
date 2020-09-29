@@ -1,7 +1,7 @@
 # nltk.download()
 import Translation.parser as parser_lib
 import Translation.simpleNLG as simpleNLG
-from Translation.Grammars.utility import grammar_url
+from Translation.Grammar.utility import grammar_url
 from Translation.Model.sentece_plan import SentencePlan
 
 

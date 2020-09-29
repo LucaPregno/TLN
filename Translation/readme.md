@@ -1,6 +1,6 @@
 # Syntactic transfer translator exercise
 
-## Track
+## Specifications
 The purpose of this exercise is to create an automatic translator IT (italian) to EN (english)
 The exercise in divided into three phases:
 - Create the parsing tree from the sentence

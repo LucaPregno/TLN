@@ -1,4 +1,3 @@
-
 def compute_similarity(value_table: dict):
     for elem in value_table:
         n_elem = 0
