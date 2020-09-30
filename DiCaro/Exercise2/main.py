@@ -9,17 +9,21 @@ def main():
     df = pd.read_excel(file_path, usecols="B:M").fillna("o")
     print("Using Lemmer")
     concept_table = process(df, parser.LEMMER)
+    # concept_table = parser.keep_frequency(concept_table, 1)
+    print(concept_table)
 
 
 def process(df, clean_method: str) -> list:
     processed = []
     for column in df:
-        concept = set()
+        concept = ""
         for definition in df[column]:
-            cleaned = parser.cleaning(definition, clean_method)
-            if len(cleaned) == 0:
-                continue
-            concept = concept.union(cleaned)
-        processed.append(concept)
+            concept += definition
+        cleaned = parser.cleaning(concept, clean_method, 2)
+        #     if len(cleaned) == 0:
+        #         continue
+        #     concept = concept.union(cleaned)
+        # processed.append(concept)
+        print(concept)
 
     return processed

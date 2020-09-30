@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import DiCaro.Utility.parser_utility as parser
-from DiCaro.Exercise1.similarity import compute_similarity
+from DiCaro.Exercise1.similarity import compute_similarity, compute_similarity
 
 file_path = os.path.abspath('../DiCaro/Exercise1/definizioni.xlsx')
 CONCRETE_G = "concrete_generic"
@@ -11,13 +11,13 @@ ABSTRACT_S = "abstract_specific"
 
 
 def main():
+    # fill na cells with stopwords that will be removed
     df = pd.read_excel(file_path, usecols="B:E").fillna("o")
-    print("Using Lemmer")
-    table = process(df, parser.LEMMER)
-    compute_similarity(table)
-    print("Using Stemmer")
-    table = process(df, parser.STEMMER)
-    compute_similarity(table)
+    methods = [parser.LEMMER_SET, parser.STEMMER_SET]
+    for method in methods:
+        print("Using", method)
+        table = process(df, method)
+        compute_similarity(table)
 
 
 def process(df, clean_method: str):
