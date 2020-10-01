@@ -92,12 +92,3 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
             f_removed = dict(filter(lambda x: x[1] >= frequency-i, tokenized.items()))
             i += 1
         return globals()[method](Counter(f_removed))
-
-
-# def keep_frequency(counter: Counter, frequency: int) -> list:
-#     """ For each set of the list keep only the word that occur at least frequency times """
-#     new_concept_table = []
-#     for word_set in counter:
-#         word_set = list(word_set)
-#         new_concept_table.append(set([w for w in word_set if word_set.count(w) >= frequency]))
-#     return new_concept_table

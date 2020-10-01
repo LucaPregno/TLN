@@ -5,7 +5,7 @@ import DiCaro.Utility.wordnet_utility as wn_utility
 
 file_path = os.path.abspath('../DiCaro/Exercise2/content_to_form.xlsx')
 MIN_FREQUENCY = 0
-PERCENTAGE = 65
+PERCENTAGE = 40
 
 
 def main():

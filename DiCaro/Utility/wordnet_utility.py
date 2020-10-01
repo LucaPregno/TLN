@@ -1,4 +1,3 @@
-from collections import Counter
 from nltk.corpus import wordnet
 import DiCaro.Utility.parser_utility as parser
 
@@ -16,10 +15,10 @@ def get_concept(table: list):
         best_synset = None
         best_score = 0
         for word in row:
-            hypernyms = calculate_hypernyms(word)
+            hypernyms = get_hypernyms(word)
             for hyper in hypernyms:
                 siblings = hyper.hyponyms()
-            related.update(hypernyms, calculate_hyponyms(word), siblings)
+            related.update(hypernyms, get_hyponyms(word), siblings)
 
             for r in related:
                 new_synset, new_score = bag_of_words(r, row.keys())
@@ -31,7 +30,7 @@ def get_concept(table: list):
     return concepts
 
 
-def calculate_hypernyms(name: str) -> set:
+def get_hypernyms(name: str) -> set:
     synsets = wordnet.synsets(name)
     hypernyms = set()
     for s in synsets:
@@ -40,7 +39,7 @@ def calculate_hypernyms(name: str) -> set:
     return hypernyms
 
 
-def calculate_hyponyms(name: str) -> set:
+def get_hyponyms(name: str) -> set:
     synsets = wordnet.synsets(name)
     hyponyms = set()
     for s in synsets:
@@ -49,7 +48,14 @@ def calculate_hyponyms(name: str) -> set:
     return hyponyms
 
 
+def get_context(synsets) -> str:
+    context = synsets.definition()
+    for e in synsets.examples():
+        context += e
+    return context
+
+
 def bag_of_words(synset, frequent_words: set) -> tuple:
-    cleaned_definition = set(parser.cleaning(synset.definition(), parser.LEMMER).keys())
+    cleaned_definition = set(parser.cleaning(get_context(synset), parser.LEMMER).keys())
     intersection = cleaned_definition.intersection(frequent_words)
     return synset, len(intersection)
