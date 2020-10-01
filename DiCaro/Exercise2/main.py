@@ -4,6 +4,8 @@ import DiCaro.Utility.parser_utility as parser
 import DiCaro.Utility.wordnet_utility as wn_utility
 
 file_path = os.path.abspath('../DiCaro/Exercise2/content_to_form.xlsx')
+MIN_FREQUENCY = 0
+PERCENTAGE = 65
 
 
 def main():
@@ -20,6 +22,6 @@ def process(df, clean_method: str) -> list:
         concept = ""
         for definition in df[column]:
             concept += definition
-        cleaned = parser.cleaning(concept, clean_method)
+        cleaned = parser.cleaning(concept, clean_method, frequency=MIN_FREQUENCY, percentage=PERCENTAGE)
         processed.append(cleaned)
     return processed

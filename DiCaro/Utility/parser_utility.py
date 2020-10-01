@@ -68,21 +68,30 @@ def rm_stopwords_punctuation(sentence, language="english", stamp=False) -> Count
     return filtered
 
 
-def cleaning(sentence: str, method: str, frequency: int = None):
+def cleaning(sentence: str, method: str, frequency: int = None, percentage: int = 0):
     """
         :param sentence: Definition to clean
         :param method: string which define which method to call
         :param frequency: if not None define minimum number of words repetition
+        :param percentage: percentage of the highest frequent words to take
         :return Counter: sentence cleaned
-        """
+    """
+    tokenized: Counter = rm_stopwords_punctuation(sentence)
     if frequency is None or frequency <= 0:
-        tokenized = rm_stopwords_punctuation(sentence)
+        # If a percentage is defined take the first elements (based on the percentage), otherwise take everything
+        if percentage != 0:
+            percentage = int((percentage/100) * len(tokenized))
+            most_common = tokenized.most_common(percentage)
+            tokenized = Counter(dict(filter(lambda elem: elem[0] in dict(most_common).keys(), tokenized.items())))
         return globals()[method](tokenized)
     else:
-        tokenized = rm_stopwords_punctuation(sentence)
         # filtering only words with at least frequency occurrences
-        tokenized = dict(filter(lambda x: x[1] >= frequency, tokenized.items()))
-        return globals()[method](Counter(tokenized))
+        f_removed = dict(filter(lambda x: x[1] >= frequency, tokenized.items()))
+        i = 1
+        while len(f_removed) <= 0:
+            f_removed = dict(filter(lambda x: x[1] >= frequency-i, tokenized.items()))
+            i += 1
+        return globals()[method](Counter(f_removed))
 
 
 # def keep_frequency(counter: Counter, frequency: int) -> list:
