@@ -21,8 +21,8 @@ def main():
     # counterB = Counter(['apple', 'apple', 'banana', 'banana', 'coconut', 'dinner'])
     # print("somma", counterA + counterB)
     # print("&", counterA & counterB)
-    # print("&", counterB & counterA)
     # print("sottrazione", counterA - counterB)
+    # print(counterA.update(counterB))
     # print(counterA)
     # dct = {1: '1', 2 : '2'}
     # prova = dict(filter(lambda x: x[1] >= 2, counterA.items()))

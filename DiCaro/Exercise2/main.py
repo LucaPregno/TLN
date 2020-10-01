@@ -10,7 +10,8 @@ def main():
     df = pd.read_excel(file_path, usecols="B:M").fillna("o")
     print("Using Lemmer")
     concept_table = process(df, parser.LEMMER)
-    wn_utility.calculate_hyponyms("dog")
+    concept_list = wn_utility.get_concept(concept_table)
+    print(concept_list)
 
 
 def process(df, clean_method: str) -> list:
@@ -19,6 +20,6 @@ def process(df, clean_method: str) -> list:
         concept = ""
         for definition in df[column]:
             concept += definition
-        cleaned = parser.cleaning(concept, clean_method, frequency=2)
+        cleaned = parser.cleaning(concept, clean_method)
         processed.append(cleaned)
     return processed

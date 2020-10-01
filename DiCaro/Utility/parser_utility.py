@@ -73,7 +73,7 @@ def cleaning(sentence: str, method: str, frequency: int = None):
         :param sentence: Definition to clean
         :param method: string which define which method to call
         :param frequency: if not None define minimum number of words repetition
-        :return: sentence cleaned
+        :return Counter: sentence cleaned
         """
     if frequency is None or frequency <= 0:
         tokenized = rm_stopwords_punctuation(sentence)
