@@ -1,3 +1,8 @@
 from nltk.corpus import wordnet
 
-wordnet.synsets('dog')
+
+def calculate_hyponyms(name: str):
+    synset = wordnet.synsets(name)
+    print(synset)
+
+

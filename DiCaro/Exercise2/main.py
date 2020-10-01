@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import DiCaro.Utility.parser_utility as parser
+import DiCaro.Utility.wordnet_utility as wn_utility
 
 file_path = os.path.abspath('../DiCaro/Exercise2/content_to_form.xlsx')
 
@@ -9,8 +10,7 @@ def main():
     df = pd.read_excel(file_path, usecols="B:M").fillna("o")
     print("Using Lemmer")
     concept_table = process(df, parser.LEMMER)
-    # concept_table = parser.keep_frequency(concept_table, 1)
-    print(concept_table)
+    wn_utility.calculate_hyponyms("dog")
 
 
 def process(df, clean_method: str) -> list:
@@ -19,11 +19,6 @@ def process(df, clean_method: str) -> list:
         concept = ""
         for definition in df[column]:
             concept += definition
-        cleaned = parser.cleaning(concept, clean_method, 2)
-        #     if len(cleaned) == 0:
-        #         continue
-        #     concept = concept.union(cleaned)
-        # processed.append(concept)
-        print(concept)
-
+        cleaned = parser.cleaning(concept, clean_method, frequency=2)
+        processed.append(cleaned)
     return processed
