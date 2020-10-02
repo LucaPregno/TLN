@@ -1,4 +1,3 @@
-
 # Concept Similarity (Exercise 1)
 
 ## Requirement
