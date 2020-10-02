@@ -53,7 +53,8 @@ As mentioned before cleaning method provide different options:
 - filter based on most common term;
 - alternative use of lemming or stemming.
 
-The best result was obtained with the first 40% of the most frequent words:
+Clearly there is no best solution overall, but every different preprocessing may create a better solution for a single concept.
+In my opinion the general best result was obtained with the first 40% of the most frequent words:
 
 Concept | Synset found | Definition | Score |
 | ---------| -------- | -------- | -------- |
