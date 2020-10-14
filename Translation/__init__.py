@@ -9,8 +9,8 @@ def main():
     sentence_list = ('È la spada laser di tuo padre',
                      'Ha fatto una mossa leale',
                      'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via',
-                     'È una mossa di tuo padre')
-    tree_list = parser_lib.parsing(sentence_list, draw_tree=True)
+                     'La spada laser di tuo padre è rotta')
+    tree_list = parser_lib.parsing(sentence_list, draw_tree=False)
     simpleNLG.parse_tree_to_sentence_plan(tree_list)
 
 

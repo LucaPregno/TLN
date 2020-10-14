@@ -110,4 +110,3 @@ def translate_tree(parsed_tree, draw_tree: bool):
         print(tree)
 
         return tree
-

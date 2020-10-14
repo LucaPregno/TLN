@@ -71,3 +71,9 @@ class SentencePlan:
     def print_object(self):
         self.object.print()
 
+    def is_verb_empty(self) -> bool:
+        if self.verb == "":
+            return True
+        else:
+            return False
+
