@@ -1,7 +1,7 @@
 from nltk import load
 from nltk.grammar import is_terminal
 
-grammar_url = "file:/grammars/grammar.cfg"
+grammar_url = "file:/Grammar/grammar.cfg"
 
 
 def set_grammar_url(new_grammar):

@@ -1,9 +1,8 @@
 from nltk import pos_tag, word_tokenize, ne_chunk, load, RecursiveDescentParser
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
-
-import Translation.Grammar.utility as grammar_utility
 from Translation.Model.dictionary import translation_dictionary
+import Translation.Grammar.utility as grammar_utility
 
 
 def tokenize(phrases, language="english"):
@@ -79,33 +78,36 @@ def chunking(tagged):
     return tagged
 
 
-def parsing(phrases, grammar=load(grammar_utility.grammar_url)):
+def parsing(phrases, grammar=load(grammar_utility.grammar_url), draw_tree: bool = False):
     rd = RecursiveDescentParser(grammar)
     tree_list = []
     print("---Parsing---")
     for i in range(len(phrases)):
         print("Sentence", i, ":", phrases[i])
         sentence_split = phrases[i].split()
-        tree = rd.parse(sentence_split)
-        # tree.draw()
+        parsed_tree = rd.parse(sentence_split)
         print("Parsing tree:")
-        tree_list.append(translate_tree(tree))
+        tree_list.append(translate_tree(parsed_tree, draw_tree))
         print("------------------")
     return tree_list
 
 
-def translate_tree(parsed_tree):
-    tree = []
-    for t in parsed_tree:
-        tree = t
+def translate_tree(parsed_tree, draw_tree: bool):
+    """
+    Translate the tree leaves using a dictionary
+    :param parsed_tree: An iterator of all parses
+    :param draw_tree: boolean to choose if draw the tree
+    :return: translated tree
+    """
+    for tree in parsed_tree:
+        if draw_tree:
+            tree.draw()
         print("Tree before translation")
-        print(t)
-        for position in t.treepositions('leaves'):
-            t[position] = translation_dictionary[t[position]]
+        print(tree)
+        for position in tree.treepositions('leaves'):
+            tree[position] = translation_dictionary[tree[position]]
+        print("Tree after translation")
+        print(tree)
 
-    print("Tree after translation")
-    tree.draw()
-    print(tree)
-
-    return tree
+        return tree
 
