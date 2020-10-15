@@ -1,6 +1,7 @@
 # Syntactic transfer translator exercise
 
 ## Specifications
+
 The purpose of this exercise is to create an automatic translator IT (italian) to EN (english)
 The exercise in divided into three phases:
 - Create the parsing tree from the sentence
@@ -12,7 +13,16 @@ The exercise in divided into three phases:
 ## Implementation
 
 ### Initial observations
-In order to generate parsing tree I had two choices:
+
+Before beginning, I had to choose whether to perform a syntactic or semantic transfer.
+My choice was a syntactic transfer, this is shown in the Vauquois triangle:
+
+![Vauquois triangle](../assets/syntacticTransfer.png)
+
+By performing a syntactic transfer it is necessary to manage first the morphological level and then the syntactic one, 
+at this point we move on to the target language.
+
+Then for the implementation I had two choices:
 - [NLTK]: open source library in Python that provide a lot of methods to create and handle
  grammar and parsing trees.
 - [TINT]: implements most of the common linguistic tools, such as part-of-speech tagging and dependency parsing. 
@@ -22,6 +32,7 @@ NLTK's choice turned out to be very good. Moreover there is a version of [Simple
  which allowed me to write the whole project with Python.
 
 ### Structure
+
 Main method is inside ```__init__.py```, this class defines the sentences that will be translated and 
 is responsible to call the principal methods.
 File ```parser.py``` provide the tree parsing of the given sentences using ```grammar.cfg``` file inside the homonym directory. 
@@ -31,6 +42,7 @@ Last, ```simpleNLG.py``` file allow to extract the sentence plan using the class
 ### Parsing tree
 
 #### Grammar
+
 In the first phase the goal is to generate a parsing tree from the given sentences.
 For this purpose I wrote my own grammar (recursive context-free), but due to the complexity of italian language 
  it is a simple grammar with the purpose of handle specific sentences.
@@ -54,6 +66,7 @@ For this purpose I wrote my own grammar (recursive context-free), but due to the
 In addition, grammar directory contains a class providing few utility methods.
 
 #### Parser
+
 In this part consist on exploiting NLTK methods in order to parse the sentences.
 At first simply split every sentence and then parse it using ```RecursiveDescentParser(grammar)```.
 The recursive descent parser builds a parse tree recursively expands its nodes using the grammar productions.
@@ -166,11 +179,12 @@ Define the whole Italian competence is not an easy task but due to the nature of
 Here we are, we finally have the sentence plan, so we're ready to use simpleNLG to build the English sentence.
 Now, after having defined a clause it is possible to define subject, verb and complements.
 Before doing this it is important to check if they are connected 
-with any determinant adjective or prepositional phrase (through the `` realiser_object``` method).
+with any determinant adjective or prepositional phrase (through the ```realiser_object``` method).
 
 ![simpleNLG_code](../assets/simpleNLG.png)
 
 ## Results
+
 Now let's see what we got:
 
 | Start | Result |
@@ -182,9 +196,10 @@ Now let's see what we got:
 
 As we can see simpleNLG not only helps us to add punctuation, but moves adjectives before the nouns they refer to 
 (which is more "English style" than Italian). It also declines the verbs according to the number of the subject.
-For example in the dictionary `` `" Ha ":" have "` `` but simpleNLG declines it using "has".
+For example in the dictionary ``` " Ha ":" have " ``` but simpleNLG declines it using "has".
 
 ### Library
+
 - [NLTK] Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.
 - [SimpleNLG]
 - [pySimpleNLG]
