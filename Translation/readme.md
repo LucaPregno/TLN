@@ -13,55 +13,61 @@ The exercise in divided into three phases:
 
 ### Initial observations
 In order to generate parsing tree I had two choices:
-- [NLTK]: open source library that provide a lot of methods in order to create and handle
+- [NLTK]: open source library in Python that provide a lot of methods to create and handle
  grammar and parsing trees.
 - [TINT]: implements most of the common linguistic tools, such as part-of-speech tagging and dependency parsing. 
 The tool was written in Java and based on Stanford CoreNLP.
 
-My choice was NLTK, so I decided to write the project on Python.
+NLTK's choice turned out to be very good. Moreover there is a version of [SimpleNLG] in Python
+ which allowed me to write the whole project with Python.
 
 ### Structure
-Main method is inside ```__init__```, this class defines the sentences I want to translate and 
-is responsible for calling the principal methods.
-Methods inside ```parser.py``` deal with the build of the parser tree from the given sentences. This is possible
-exploiting the file ```grammar.cfg``` inside the homonym directory.
-The last file```simpleNLG``` class provide translation of parsing tree to sentence plan using the structure defined
-in the model directory.
-
+Main method is inside ```__init__.py```, this class defines the sentences that will be translated and 
+is responsible to call the principal methods.
+File ```parser.py``` provide the tree parsing of the given sentences using ```grammar.cfg``` file inside the homonym directory. 
+Last, ```simpleNLG.py``` file allow to extract the sentence plan using the classes defined in the model directory
+ and then build the phrase from it.
+ 
 ### Parsing tree
 
 #### Grammar
-In the first phase the intention is to generate a parsing tree from the given sentences.
-For this purpose I wrote my own grammar, but cause the complexity of italian language I wrote a simple
- grammar with the purpose of handle specific sentences.
+In the first phase the goal is to generate a parsing tree from the given sentences.
+For this purpose I wrote my own grammar (recursive context-free), but due to the complexity of italian language 
+ it is a simple grammar with the purpose of handle specific sentences.
  The grammar categorizes the symbol as follows:
-- **S**: starting symbol
-- **NP**: Noun Phrase
-- **NOM**: Nominal
-- **VP**: Verbal Phrase
-- **PP**: Propositional Phrase
-- **PropN**: Proper Name
-- **Det**: Determiner
-- **N**: Noun
-- **Adj**: Adjective
-- **V**: Verb
-- **Aux**: Auxiliary
-- **Adv**: Adverb
-- **Adp**: Preposition
+- Non terminal:
+    - **S**: starting symbol
+    - **NP**: Noun Phrase
+    - **NOM**: Nominal
+    - **VP**: Verbal Phrase
+    - **PP**: Propositional Phrase
+- Terminal:
+    - **Noun**: Noun
+    - **Verb**: Verb
+    - **PropN**: Proper Name
+    - **Det**: Determiner
+    - **Adj**: Adjective
+    - **Aux**: Auxiliary
+    - **Adv**: Adverb
+    - **Adp**: Preposition
 
-In addition, in the grammar directory is present a class providing few utility methods.
+In addition, grammar directory contains a class providing few utility methods.
 
 #### Parser
-In this part I exploit NLTK methods in order to parse the sentences.
-This method simply split every sentence and then parse it using ```RecursiveDescentParser(grammar)```.
+In this part consist on exploiting NLTK methods in order to parse the sentences.
+At first simply split every sentence and then parse it using ```RecursiveDescentParser(grammar)```.
+The recursive descent parser builds a parse tree recursively expands its nodes using the grammar productions.
+The name descent is due to the fact that the expansion process is downward.
 This parser is very simple but allow using recursion inside the grammar.
+
 ```
 rd = RecursiveDescentParser(grammar)
 p_split = phrase.split()
 tree = rd.parse(sentence)
 ```
 
-The result tree for the sentence: ```È la spada laser di tuo padre```
+The result tree for the sentence: *È la spada laser di tuo padre*
+
 ```
 (S
  (VP (V È)
@@ -72,8 +78,16 @@ The result tree for the sentence: ```È la spada laser di tuo padre```
             (NOM (N padre)))))))) 
 ```
 
-Now every leaf is rendered with a simple dictionary inside the model directory.
+
+The output is a [constituents tree](###-why-tree?) that is encoded using S-expressions. 
+These expressions are conventions for representing semi-structured data in textual form 
+and are mainly known for their use in the *lisp* family of programming languages.
+
+The next step is to translate every single leaf of the tree through a dictionary.
+The translation is done through a dictionary that only translates the necessary words and is located in the *Model* directory.
+
 Here the result:
+
 ```
 (S
  (VP (V be)
@@ -83,16 +97,44 @@ Here the result:
           (NP (Det your) 
             (NOM (N father)))))))) 
 ```
-You can see how simply following the tree lead to a wrong translation, 
-the next section mold the tree to obtain a sentence plan. 
+
+
+It is easy to see how simply following the tree leads to a wrong translation, 
+the next section tries to solve this problem. 
+
+### Why Tree?
+
+In the morphology phase very complex structures are not required and strings are enough.
+Going up to the syntax level, however, things get complicated and it is necessary 
+to use more sophisticated data structures that have the advantage of simplifying algorithms.
+In particular NLTK through parsification returns constituents trees.
+In the next phase this tree will be transformed into a sentence plan that will be the SimpleNLG input.
 
 ### Build the sentence plan
-First of all we need to define what is a sentence plan: hybrid parsing tree where
- we define morphological elements too, moreover tagging the correspondent subtrees defining syntactical element
-such as subject and complement.
-For this purpose I create some classes to define the main different part of a phrase:
-Object class permit to define the value, a list of determiner, list of adjective, and a preposition referred to it.
-This class comes in help when we want to define subject or complement.
+As mentioned earlier we need to get a sentence plan to pass to simpleNLG.
+
+We may define a sentence plan as a dependency tree with two substantial differences:
+- its elements are lemmas (still to be flexed)
+- there is no word order.
+
+To obtain the sentence plan from the constituent tree some classes have been defined:
+
+*SentencePlan* defines the fundamental parts (subject, verb and complement) of a sentence and allows to compose it.
+
+```
+class SentencePlan:
+    def __init__(self, verb=""):
+        self.subject = Object()
+        self.verb = verb
+        self.object = Object()
+```
+
+*Object* class allows to define subject and complement with what concerns them through the following fields:
+- value;
+- list of determinants;
+- list of adjectives;
+- preposition referring to a subject or a complement.
+
 ```
 class Object:
     def __init__(self, value=""):
@@ -101,37 +143,30 @@ class Object:
         self.adjective = []
         self.preposition = Preposition()
 ```
-Preposition class, like the name suggest is usefull to take care of prepositional phrase, and because 
-we define a preposition object inside the object class we can know to who the preposition is referred.
-```
-class Preposition:
-    def __init__(self, value=""):
-        self.value = value
-        self.object = ""
-        self.determiner = []
-        self.adjective = []
-```
-Last, but not least the SentencePlan class allows to compose the classes before explained and so the part of the phrase.
-```
-class SentencePlan:
-    def __init__(self, verb=""):
-        self.subject = Object()
-        self.verb = verb
-        self.object = Object()
-```
+
+Furthermore, the *Preposition* class is used in a similar way to the previous one but with regard to prepositions.
+
 In order to fill the classes just enunciated the algorithm (which build the sentence plan) perform a deep search 
-on the parsed tree. During this research the tree label define how to store the words.
-This is not an easy task but due to the toy grammar we can make some assumption to simplify.
-1. first noun in the phrase (that is not inside a PP) is the subject
+on the parsed tree. During this research the **competence** define dependency between words.
+
+But what is the *competence* ?
+
+Competence is the syntactic knowledge/information that we develop learning a certain language.
+For example in Italian the subject goes before the verb or that in English the adjectives anticipate the noun they refer to.
+
+Define the whole Italian competence is not an easy task but due to the nature of the toy grammar
+ is possible to make some assumption to simplify:
+1. first noun in the phrase (not inside a PP) is the subject
 2. first noun in the VP (that is not inside a PP) is the complement
-3. PP are referred to the nearest left Noun
-4. if the sentence start with VP there is implied subject (which I assumed is "It")
+3. PP are referred to the nearest Noun
+4. if the sentence begins with VP there is an implied subject (assumed to be "It")
 
 ### Using simpleNLG
-Here we go, finally we have got the sentence plan, hence we are ready to use simpleNLG in order to build the english phrase.
-Now, after define a clause is possible to define subject, verb and complements.
-Before to do that is important to check if they are linked with some determiner adjective or
-prepositional phrase (through the ```realiser_object``` method).
+
+Here we are, we finally have the sentence plan, so we're ready to use simpleNLG to build the English sentence.
+Now, after having defined a clause it is possible to define subject, verb and complements.
+Before doing this it is important to check if they are connected 
+with any determinant adjective or prepositional phrase (through the `` realiser_object``` method).
 
 ![simpleNLG_code](../assets/simpleNLG.png)
 
@@ -143,11 +178,11 @@ Now let's see what we got:
 | È la spada laser di tuo padre  | It is the light saber of your father.  |
 | Ha fatto una mossa leale  | It has done a loyal move.  |
 | Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via  | The last leftovers of old Republic has been swept away.  |
-| È una mossa di tuo padre  | It is a move of your father.  |
+| La spada laser di tuo padre è rotta  | The light saber of your father is broken.  |
 
-As we can see simpleNLG not only help us to add punctuation, but move the adjectives before
-nouns (which is more "english style" compared to italian). Moreover, decline verbs according to
-the number of the subject (e.g. in my dictionary ```"Ha": "have"``` but simpleNLG decline it using "has").
+As we can see simpleNLG not only helps us to add punctuation, but moves adjectives before the nouns they refer to 
+(which is more "English style" than Italian). It also declines the verbs according to the number of the subject.
+For example in the dictionary `` `" Ha ":" have "` `` but simpleNLG declines it using "has".
 
 ### Library
 - [NLTK] Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.

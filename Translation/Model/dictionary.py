@@ -29,7 +29,5 @@ translation_dictionary = {
     "con": "with",
     "di": "of",
     "della": "of",
-    "cane": "dog",
-    "gatto": "cat",
-    "rincorre": "chased"
+    "verde": "green"
 }
