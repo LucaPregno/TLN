@@ -1,4 +1,3 @@
-# nltk.download()
 import Translation.parser as parser_lib
 import Translation.simpleNLG as simpleNLG
 from Translation.Grammar.utility import grammar_url
@@ -9,8 +8,9 @@ def main():
     sentence_list = ('È la spada laser di tuo padre',
                      'Ha fatto una mossa leale',
                      'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via',
-                     'La spada laser di tuo padre è rotta')
-    tree_list = parser_lib.parsing(sentence_list, draw_tree=False)
+                     'La spada laser di tuo padre è rotta',
+                     'La spada laser di Kenobi è molto vecchia')
+    tree_list = parser_lib.parsing(sentence_list, draw_tree=True)
     simpleNLG.parse_tree_to_sentence_plan(tree_list)
 
 
@@ -29,5 +29,6 @@ def nltk_methods():
 
 
 if __name__ == '__main__':
+    # nltk.download()
     main()
     # nltk_methods()

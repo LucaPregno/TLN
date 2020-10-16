@@ -52,6 +52,7 @@ For this purpose I wrote my own grammar (recursive context-free), but due to the
     - **NP**: Noun Phrase
     - **NOM**: Nominal
     - **VP**: Verbal Phrase
+    - **NPP**: Nominal Predicate Phrase
     - **PP**: Propositional Phrase
 - Terminal:
     - **Noun**: Noun
@@ -62,6 +63,7 @@ For this purpose I wrote my own grammar (recursive context-free), but due to the
     - **Aux**: Auxiliary
     - **Adv**: Adverb
     - **Adp**: Preposition
+    - **NominalPredicate**: Nominal Predicate
 
 In addition, grammar directory contains a class providing few utility methods.
 
@@ -92,7 +94,7 @@ The result tree for the sentence: *È la spada laser di tuo padre*
 ```
 
 
-The output is a [constituents tree](###-why-tree?) that is encoded using S-expressions. 
+The output is a [constituents tree](/Translation#why-tree) that is encoded using S-expressions. 
 These expressions are conventions for representing semi-structured data in textual form 
 and are mainly known for their use in the *lisp* family of programming languages.
 
@@ -193,6 +195,7 @@ Now let's see what we got:
 | Ha fatto una mossa leale  | It has done a loyal move.  |
 | Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via  | The last leftovers of old Republic has been swept away.  |
 | La spada laser di tuo padre è rotta  | The light saber of your father is broken.  |
+| La spada laser di Kenobi è molto vecchia  | The light saber of Kenobi is very old.  |
 
 As we can see simpleNLG not only helps us to add punctuation, but moves adjectives before the nouns they refer to 
 (which is more "English style" than Italian). It also declines the verbs according to the number of the subject.

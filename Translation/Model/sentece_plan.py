@@ -21,6 +21,22 @@ class Object:
         print("Adjective:", self.adjective)
 
 
+class Verb:
+    def __init__(self, value=""):
+        self.value = value
+        self.predicate = []
+
+    def print(self):
+        self.print_value()
+        self.print_predicate()
+
+    def print_value(self):
+        print("Value:", self.value)
+
+    def print_predicate(self):
+        print("Predicate:", self.predicate)
+
+
 class Preposition:
     def __init__(self, value=""):
         self.value = value
@@ -49,9 +65,9 @@ class Preposition:
 
 
 class SentencePlan:
-    def __init__(self, verb=""):
+    def __init__(self):
         self.subject = Object()
-        self.verb = verb
+        self.verb = Verb()
         self.object = Object()
 
     def print(self):
@@ -66,14 +82,10 @@ class SentencePlan:
         self.subject.print()
 
     def print_verb(self):
-        print("Value:", self.verb)
+        self.verb.print()
 
     def print_object(self):
         self.object.print()
 
     def is_verb_empty(self) -> bool:
-        if self.verb == "":
-            return True
-        else:
-            return False
-
+        return True if self.verb.value == "" else False

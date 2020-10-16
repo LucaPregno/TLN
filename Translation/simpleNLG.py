@@ -34,10 +34,12 @@ def sentence_plan_build(tree):
                 father.set(subtree.height(), subtree.label())
 
         # searching something linked to verb
-        if subtree.label() in ["V", "Aux", "Adv"]:
-            sentence_plan.verb += subtree[0]
-            sentence_plan.verb += " "
-        if father.label == "NP":
+        if father.label == "VP":
+            if subtree.label() in ["V", "Aux", "Adv"]:
+                sentence_plan.verb.value += subtree[0] + " "
+            elif subtree.label() == "NominalPredicate":
+                sentence_plan.verb.predicate.append(subtree[0])
+        elif father.label == "NP":
             # searching the subject
             if sentence_plan.is_verb_empty():
                 if subtree.label() == "Det":
@@ -88,7 +90,8 @@ def use_simplenlg(sentence_plan):
     c = nlg_factory.createClause()
     np = realiser_object(sentence_plan.subject)
     c.setSubject(np)
-    c.setVerb(sentence_plan.verb)
+    vp = realiser_verb(sentence_plan.verb)
+    c.setVerb(vp)
     complement = realiser_object(sentence_plan.object)
     c.addComplement(complement)
     print(realiser.realiseSentence(c))
@@ -111,7 +114,11 @@ def realiser_object(obj):
             p_np.addModifier(a)
         preposition.addComplement(p_np)
         np.addComplement(preposition)
-
     return np
 
 
+def realiser_verb(verb):
+    vp = nlg_factory.createVerbPhrase(verb.value)
+    for p in verb.predicate:
+        vp.addModifier(p)
+    return vp

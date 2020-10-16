@@ -1,5 +1,6 @@
 translation_dictionary = {
     "Repubblica": "Republic",
+    "Kenobi": "Kenobi",
     "il": "the",
     "la": "the",
     "La": "the",
@@ -29,5 +30,7 @@ translation_dictionary = {
     "con": "with",
     "di": "of",
     "della": "of",
-    "verde": "green"
+    "verde": "green",
+    "fosforescente": "phosphorescent",
+    "molto": "very"
 }
