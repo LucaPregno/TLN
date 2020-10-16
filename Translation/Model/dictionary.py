@@ -29,8 +29,11 @@ translation_dictionary = {
     "da": "by",
     "con": "with",
     "di": "of",
+    "del": "of",
     "della": "of",
     "verde": "green",
     "fosforescente": "phosphorescent",
-    "molto": "very"
+    "molto": "very",
+    "Io": "I",
+    "generale": "general"
 }

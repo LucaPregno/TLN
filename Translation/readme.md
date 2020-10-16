@@ -195,7 +195,7 @@ Now let's see what we got:
 | Ha fatto una mossa leale  | It has done a loyal move.  |
 | Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via  | The last leftovers of old Republic has been swept away.  |
 | La spada laser di tuo padre è rotta  | The light saber of your father is broken.  |
-| La spada laser di Kenobi è molto vecchia  | The light saber of Kenobi is very old.  |
+| La spada laser del generale Kenobi è molto vecchia | The light saber of general Kenobi is very old.  |
 
 As we can see simpleNLG not only helps us to add punctuation, but moves adjectives before the nouns they refer to 
 (which is more "English style" than Italian). It also declines the verbs according to the number of the subject.

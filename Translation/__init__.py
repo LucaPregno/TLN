@@ -9,8 +9,8 @@ def main():
                      'Ha fatto una mossa leale',
                      'Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via',
                      'La spada laser di tuo padre è rotta',
-                     'La spada laser di Kenobi è molto vecchia')
-    tree_list = parser_lib.parsing(sentence_list, draw_tree=True)
+                     'La spada laser del generale Kenobi è molto vecchia')
+    tree_list = parser_lib.parsing(sentence_list, draw_tree=False)
     simpleNLG.parse_tree_to_sentence_plan(tree_list)
 
 
