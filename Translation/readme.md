@@ -1,4 +1,4 @@
-# Syntactic transfer translator exercise
+# Syntactic transfer exercise
 
 ## Specifications
 
@@ -126,6 +126,7 @@ In particular NLTK through parsification returns constituents trees.
 In the next phase this tree will be transformed into a sentence plan that will be the SimpleNLG input.
 
 ### Build the sentence plan
+
 As mentioned earlier we need to get a sentence plan to pass to simpleNLG.
 
 We may define a sentence plan as a dependency tree with two substantial differences:
@@ -179,9 +180,9 @@ Define the whole Italian competence is not an easy task but due to the nature of
 ### Using simpleNLG
 
 Here we are, we finally have the sentence plan, so we're ready to use simpleNLG to build the English sentence.
-Now, after having defined a clause it is possible to define subject, verb and complements.
+Now, after having defined a clause it is possible to define subject, verb and complements from the sentence plan.
 Before doing this it is important to check if they are connected 
-with any determinant adjective or prepositional phrase (through the ```realiser_object``` method).
+with any determinant, adjective or prepositional phrase (through the ```realiser_object``` method).
 
 ![simpleNLG_code](../assets/simpleNLG.png)
 
@@ -191,11 +192,11 @@ Now let's see what we got:
 
 | Start | Result |
 | ------------- | ------------- |
-| È la spada laser di tuo padre  | It is the light saber of your father.  |
-| Ha fatto una mossa leale  | It has done a loyal move.  |
-| Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via  | The last leftovers of old Republic has been swept away.  |
-| La spada laser di tuo padre è rotta  | The light saber of your father is broken.  |
-| La spada laser del generale Kenobi è molto vecchia | The light saber of general Kenobi is very old.  |
+| È la spada laser di tuo padre | It is the light saber of your father. |
+| Ha fatto una mossa leale | It has done a loyal move. |
+| Gli ultimi avanzi della vecchia Repubblica sono stati spazzati via | The last leftovers of old Republic has been swept away. |
+| La spada laser di tuo padre è rotta | The light saber of your father is broken. |
+| La spada laser del generale Kenobi è molto vecchia | The light saber of general Kenobi is very old. |
 
 As we can see simpleNLG not only helps us to add punctuation, but moves adjectives before the nouns they refer to 
 (which is more "English style" than Italian). It also declines the verbs according to the number of the subject.
