@@ -59,12 +59,12 @@ In my opinion the general best result was obtained with the first 40% of the mos
 Concept | Synset found | Definition | Score |
 | ---------| -------- | -------- | -------- |
 | justice | Synset('non-discrimination.n.01') | fairness in treating people without prejudice  | 4 |
-| patience | Synset('digest.v.03') | put up with something or somebody unpleasant | 5 |
+| patience | Synset('accept.v.07') | tolerate or accommodate oneself to | 5 |
 | greed | Synset('greed.n.01') | excessive desire to acquire or possess more (especially more material wealth) than one needs or deserves | 7 |
 | politics  | Synset('territorial.a.01') | of or relating to a territory | 3 |
 | food | Synset('commensal.n.01') | either of two different animal or plant species living in close association but not interdependent | 8 |
 | radiator | Synset('hot.a.01') | used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | 12 |
-| vehicle | Synset('wheeled_vehicle.n.01') | a vehicle that moves on wheels and usually has a container for transporting things or people | 12 |
+| vehicle | Synset('container.n.01') | any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | 14 |
 | screw | Synset('solder.n.01') | an alloy (usually of lead and tin) used when melted to join two metal surfaces | 15 |
 
 The table shows the target meanings of the definitions and what obtained in the best configuration, 

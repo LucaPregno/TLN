@@ -1,7 +1,6 @@
-from nltk import word_tokenize, WordNetLemmatizer, PorterStemmer, Counter
+from nltk import word_tokenize, pos_tag, WordNetLemmatizer, PorterStemmer, Counter
 from nltk.corpus import stopwords
 from DiCaro.Utility.utility import remove
-
 
 LEMMER = "lemmer"
 LEMMER_SET = "lemmer_set"
@@ -10,6 +9,13 @@ STEMMER = "stemmer"
 STEMMER_SET = "stemmer_set"
 stemmatizer = PorterStemmer()
 punctuation = {',', ';', '(', ')', '{', '}', ':', '?', '!', '.', "'s"}
+
+
+def pos(tokens, language="eng"):
+    tagged = []
+    for i in range(len(tokens)):
+        tagged.append(pos_tag(tokens[i], lang=language))
+    return tagged
 
 
 def lemmer(tokens) -> Counter:
@@ -78,17 +84,17 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
     """
     tokenized: Counter = rm_stopwords_punctuation(sentence)
     if frequency is None or frequency <= 0:
-        # If a percentage is defined take the first elements (based on the percentage), otherwise take everything
+        # If a percentage is defined take the first elements (based on percentage), otherwise take everything
         if percentage != 0:
             percentage = int((percentage/100) * len(tokenized))
             most_common = tokenized.most_common(percentage)
             tokenized = Counter(dict(filter(lambda elem: elem[0] in dict(most_common).keys(), tokenized.items())))
         return globals()[method](tokenized)
     else:
-        # filtering only words with at least frequency occurrences
-        f_removed = dict(filter(lambda x: x[1] >= frequency, tokenized.items()))
+        # Filtering only words with at least frequency occurrences
+        filtered = dict(filter(lambda x: x[1] >= frequency, tokenized.items()))
         i = 1
-        while len(f_removed) <= 0:
-            f_removed = dict(filter(lambda x: x[1] >= frequency-i, tokenized.items()))
+        while len(filtered) <= 0:
+            filtered = dict(filter(lambda x: x[1] >= frequency-i, tokenized.items()))
             i += 1
-        return globals()[method](Counter(f_removed))
+        return globals()[method](Counter(filtered))

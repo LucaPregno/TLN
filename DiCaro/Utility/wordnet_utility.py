@@ -5,7 +5,7 @@ import DiCaro.Utility.parser_utility as parser
 
 def get_concept(table: list):
     """
-    For each table row (concept definition) calculate the highest intersection between
+    For each table row (concept definition) calculate highest intersection between
     the row words with the related (hypernyms, hyponyms, siblings) definition of the corresponding synsets.
     :param table: list of most frequent words in every definitions grouped by concept
     :return concepts: list of concept with his associated score
@@ -19,8 +19,8 @@ def get_concept(table: list):
             synsets = wordnet.synsets(word)
             hypernyms = get_hypernyms(synsets)
             for hyper in hypernyms:
-                siblings = hyper.hyponyms()
-            related_synsets.update(synsets, hypernyms, get_hyponyms(synsets), siblings)
+                siblings = siblings.union(hyper.hyponyms())
+            related_synsets.update(synsets, get_hyponyms(synsets), siblings)
 
             for related in related_synsets:
                 new_synset, new_score = bag_of_words_weighted(related, row)

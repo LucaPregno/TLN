@@ -1,3 +1,14 @@
+Frequency:0 Percentage:20 Method:lemmer
+
+Synset('non-discrimination.n.01') fairness in treating people without prejudice | Score:4
+Synset('ability.n.01') the quality of being able to perform; a quality that permits or facilitates achievement or accomplishment | Score:4
+Synset('longer.n.01') a person with a strong desire for something | Score:6
+Synset('territorial.a.01') of or relating to a territory | Score:3
+Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:8
+Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
+Synset('folk.n.01') people in general (often used in the plural) | Score:10
+Synset('pin.n.09') a small slender (often pointed) piece of wood or metal used to support or fasten or attach things | Score:13
+-------------------------------------------------------------------------
 Frequency:0 Percentage:25 Method:lemmer
 
 Synset('non-discrimination.n.01') fairness in treating people without prejudice | Score:4
@@ -6,15 +17,32 @@ Synset('longer.n.01') a person with a strong desire for something | Score:6
 Synset('territorial.a.01') of or relating to a territory | Score:3
 Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:8
 Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
-Synset('wheeled_vehicle.n.01') a vehicle that moves on wheels and usually has a container for transporting things or people | Score:12
+Synset('container.n.01') any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | Score:12
 Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:15
+-------------------------------------------------------------------------
+Frequency:0 Percentage:30 Method:lemmer
 
-Synset('elegance.n.02') a quality of neatness and ingenious simplicity in the solution of a problem (especially in science or mathematics) | Score:5
-Synset('match_point.n.01') (tennis) the final point needed to win a match (especially in tennis) | Score:3
-Synset('augmentation.n.01') the amount by which something increases | Score:2
-Synset('folk.n.01') people in general (often used in the plural) | Score:6
+Synset('non-discrimination.n.01') fairness in treating people without prejudice | Score:4
+Synset('digest.v.03') put up with something or somebody unpleasant | Score:5
+Synset('longer.n.01') a person with a strong desire for something | Score:6
+Synset('territorial.a.01') of or relating to a territory | Score:3
+Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:8
+Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
+Synset('container.n.01') any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | Score:14
+Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:15
 -------------------------------------------------------------------------
 Frequency:0 Percentage:40 Method:lemmer
+
+Synset('non-discrimination.n.01') fairness in treating people without prejudice | Score:4
+Synset('accept.v.07') tolerate or accommodate oneself to | Score:5
+Synset('greed.n.01') excessive desire to acquire or possess more (especially more material wealth) than one needs or deserves | Score:7
+Synset('territorial.a.01') of or relating to a territory | Score:3
+Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:8
+Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
+Synset('container.n.01') any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | Score:14
+Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:15
+-------------------------------------------------------------------------
+Frequency:0 Percentage:50 Method:lemmer
 
 Synset('non-discrimination.n.01') fairness in treating people without prejudice | Score:4
 Synset('digest.v.03') put up with something or somebody unpleasant | Score:5
@@ -22,13 +50,8 @@ Synset('greed.n.01') excessive desire to acquire or possess more (especially mor
 Synset('territorial.a.01') of or relating to a territory | Score:3
 Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:8
 Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
-Synset('wheeled_vehicle.n.01') a vehicle that moves on wheels and usually has a container for transporting things or people | Score:12
-Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:15
-
-Synset('war_party.n.01') a band of warriors who raid or fight an enemy (used especially of Native Americans) | Score:6
-Synset('set_point.n.01') (tennis) the final point needed to win a set in tennis | Score:3
-Synset('change.n.01') an event that occurs when something passes from one state or phase to another | Score:3
-Synset('folk.n.01') people in general (often used in the plural) | Score:7
+Synset('container.n.01') any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | Score:14
+Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:16
 -------------------------------------------------------------------------
 Frequency:0 Percentage:65 Method:lemmer
 
@@ -36,61 +59,52 @@ Synset('movement.n.04') a group of people with a common ideology who try togethe
 Synset('accept.v.07') tolerate or accommodate oneself to | Score:6
 Synset('greed.n.01') excessive desire to acquire or possess more (especially more material wealth) than one needs or deserves | Score:7
 Synset('abstraction.n.01') a concept or idea not associated with any specific instance | Score:4
-Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:8
+Synset('parasite.n.01') an animal or plant that lives in or on a host (another animal or plant); it obtains nourishment from the host without benefiting or killing the host | Score:8
 Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
 Synset('container.n.01') any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | Score:15
 Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:16
-
-Synset('folk.n.01') people in general (often used in the plural) | Score:7
-Synset('match_point.n.01') (tennis) the final point needed to win a match (especially in tennis) | Score:3
-Synset('change.n.01') an event that occurs when something passes from one state or phase to another | Score:3
-Synset('folk.n.01') people in general (often used in the plural) | Score:8
 -------------------------------------------------------------------------
-Frequency:5 Percentage:0 Method:lemmer
+Frequency:1 Percentage:0 Method:lemmer
 
-Synset('quantity.n.03') the concept that something has a magnitude and can be represented in mathematical expressions by a constant or a variable | Score:3
+Synset('interest.n.05') (law) a right or legal share of something; a financial involvement with something | Score:5
+Synset('accept.v.07') tolerate or accommodate oneself to | Score:6
+Synset('greed.n.01') excessive desire to acquire or possess more (especially more material wealth) than one needs or deserves | Score:9
+Synset('yard.n.03') a tract of land enclosed for particular activities (sometimes paved and usually associated with buildings) | Score:5
+Synset('cell.n.02') (biology) the basic structural and functional unit of all organisms; they may exist as independent units of life (as in monads) or may form colonies or tissues as in higher plants and animals | Score:9
+Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
+Synset('container.n.01') any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | Score:17
+Synset('pin.n.09') a small slender (often pointed) piece of wood or metal used to support or fasten or attach things | Score:17
+-------------------------------------------------------------------------
+Frequency:2 Percentage:0 Method:lemmer
+
+Synset('non-discrimination.n.01') fairness in treating people without prejudice | Score:4
+Synset('tolerate.v.03') have a tolerance for a poison or strong drug or pathogen or environmental condition | Score:4
+Synset('hope.n.02') the general feeling that some desire will be fulfilled | Score:5
+Synset('federate.v.02') unite on a federal basis or band together as a league | Score:2
+Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:8
+Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
+Synset('container.n.01') any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another) | Score:14
+Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:15
+-------------------------------------------------------------------------
+Frequency:3 Percentage:0 Method:lemmer
+
+Synset('notion.n.02') a general inclusive concept | Score:3
 Synset('tolerate.v.03') have a tolerance for a poison or strong drug or pathogen or environmental condition | Score:4
 Synset('fancy.v.02') have a fancy or particular liking or desire for | Score:5
 Synset('ally_with.v.01') unite formally; of interest groups or countries | Score:2
 Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:6
-Synset('heat.v.04') gain heat or get hot | Score:4
-Synset('secondhand.s.02') previously used or owned by another | Score:6
-Synset('secondhand.s.02') previously used or owned by another | Score:7
-
-Synset('particularly.r.01') to a distinctly greater extent or degree than is common | Score:3
-Synset('be.v.01') have the quality of being; (copula, used with an adjective or a predicate noun) | Score:2
-Synset('build_up.v.01') enlarge, develop, or increase by degrees or in stages | Score:2
-Synset('nation.n.02') the people who live in a nation or country | Score:4
--------------------------------------------------------------------------
-Frequency:3 Percentage:0 Method:lemmer
-
-Synset('abstraction.n.01') a concept or idea not associated with any specific instance | Score:3
-Synset('stand_for.v.04') tolerate or bear | Score:4
-Synset('sexual_desire.n.01') a desire for sexual intimacy | Score:5
-Synset('body.n.02') a group of persons associated by some common tie or occupation and regarded as an entity | Score:2
-Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:6
 Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:10
 Synset('folk.n.01') people in general (often used in the plural) | Score:10
 Synset('solder.n.01') an alloy (usually of lead and tin) used when melted to join two metal surfaces | Score:13
-
-Synset('particularly.r.01') to a distinctly greater extent or degree than is common | Score:3
-Synset('be.v.01') have the quality of being; (copula, used with an adjective or a predicate noun) | Score:2
-Synset('advance.n.06') increase in price or value | Score:2
-Synset('peanut_gallery.n.01') (figurative) people whose criticisms are regarded as irrelevant or insignificant (resembling uneducated people who throw peanuts on the stage to express displeasure with a performance) | Score:4
 -------------------------------------------------------------------------
-Frequency:1 Percentage:0 Method:lemmer
+Frequency:5 Percentage:0 Method:lemmer
 
-Synset('force.n.04') group of people willing to obey orders | Score:6
-Synset('accept.v.07') tolerate or accommodate oneself to | Score:6
-Synset('greed.n.01') excessive desire to acquire or possess more (especially more material wealth) than one needs or deserves | Score:9
-Synset('yard.n.03') a tract of land enclosed for particular activities (sometimes paved and usually associated with buildings) | Score:5
-Synset('reservoir.n.04') anything (a person or animal or plant or substance) in which an infectious agent normally lives and multiplies | Score:9
-Synset('hot.a.01') used of physical heat; having a high or higher than desirable temperature or giving off heat or feeling or causing a sensation of heat or burning | Score:12
-Synset('wheeled_vehicle.n.01') a vehicle that moves on wheels and usually has a container for transporting things or people | Score:14
-Synset('pin.n.09') a small slender (often pointed) piece of wood or metal used to support or fasten or attach things | Score:17
-
-Synset('folk.n.01') people in general (often used in the plural) | Score:8
-Synset('landmark.n.04') an anatomical structure used as a point of origin in locating other anatomical structures (as in surgery) or as point from which measurements can be taken | Score:5
-Synset('craft_fair.n.01') a fair at which objects made by craftsmen are offered for sale | Score:3
-Synset('folk.n.01') people in general (often used in the plural) | Score:8
+Synset('conceptualization.n.02') an elaborated concept | Score:3
+Synset('tolerate.v.02') recognize and respect (rights and beliefs of others) | Score:4
+Synset('longing.n.01') prolonged unfulfilled desire or need | Score:5
+Synset('federate.v.02') unite on a federal basis or band together as a league | Score:2
+Synset('commensal.n.01') either of two different animal or plant species living in close association but not interdependent | Score:6
+Synset('calcine.v.01') heat a substance so that it oxidizes or reduces | Score:4
+Synset('exploited.s.02') of persons; taken advantage of | Score:6
+Synset('exploited.s.02') of persons; taken advantage of | Score:7
 -------------------------------------------------------------------------
