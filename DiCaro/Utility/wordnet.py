@@ -1,6 +1,6 @@
 from collections import Counter
 from nltk.corpus import wordnet
-import DiCaro.Utility.parser_utility as parser
+import DiCaro.Utility.parser as parser
 
 
 def get_concept(table: list):
@@ -68,3 +68,21 @@ def bag_of_words_weighted(synset, term_dictionary: Counter) -> tuple:
         if term_dictionary[word] >= 0:
             score += term_dictionary[word]
     return synset, score
+
+
+def lesk(word: str, sentence: str):
+    """
+    :param word: word needs to be disambiguated
+    :param sentence: used to disambiguate
+    :return: synset with best intersection between phrase and word context
+    """
+    synsets = wordnet.synsets(word)
+    sentence = set(parser.cleaning(sentence=sentence, method=parser.LEMMER))
+    best_synset = None
+    best_score = 0
+    for synset in synsets:
+        new_synset, new_score = bag_of_words(synset, sentence)
+        if new_score > best_score:
+            best_score = new_score
+            best_synset = new_synset
+    return best_synset

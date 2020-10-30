@@ -20,7 +20,7 @@ def main():
     elif x == 3:
         print("Hanks")
         # word = input("Type the selected word")
-        exercise3("hit")
+        exercise3("play")
 
     print("\n")
 

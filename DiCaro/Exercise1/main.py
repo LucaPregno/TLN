@@ -1,7 +1,7 @@
 import os
 import pandas as pd
-import DiCaro.Utility.parser_utility as parser
-from DiCaro.Exercise1.similarity import compute_similarity, compute_similarity
+import DiCaro.Utility.parser as parser
+from DiCaro.Exercise1.similarity import compute_similarity
 
 file_path = os.path.abspath('../DiCaro/Exercise1/definizioni.xlsx')
 CONCRETE_G = "concrete_generic"
