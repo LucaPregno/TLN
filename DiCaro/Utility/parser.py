@@ -1,6 +1,10 @@
+import spacy
 from nltk import word_tokenize, pos_tag, WordNetLemmatizer, PorterStemmer, Counter
 from nltk.corpus import stopwords
-from DiCaro.Utility.utility import remove
+from DiCaro.Utility import utility, resources
+from DiCaro.Utility.wordnet import lesk
+from DiCaro.Exercise3.verb import Verb
+
 
 LEMMER = "lemmer"
 LEMMER_SET = "lemmer_set"
@@ -8,7 +12,9 @@ lemmatizer = WordNetLemmatizer()
 STEMMER = "stemmer"
 STEMMER_SET = "stemmer_set"
 stemmatizer = PorterStemmer()
-punctuation = {',', ';', '(', ')', '{', '}', ':', '?', '!', '.', "'s"}
+
+SPACY_CORE = 'en_core_web_sm'
+nlp = spacy.load(SPACY_CORE)
 
 
 def pos(tokens, language="eng"):
@@ -65,8 +71,8 @@ def stemmer_set(tokens, stamp=False) -> set:
 def rm_stopwords_punctuation(sentence, language="english", stamp=False) -> Counter:
     sentence = Counter(word_tokenize(sentence))
     stopwords_list = Counter(stopwords.words(language))
-    stop_punctuation = stopwords_list + Counter(punctuation)
-    filtered = remove(sentence, stop_punctuation)
+    stop_punctuation = stopwords_list + Counter(resources.punctuation)
+    filtered = utility.remove(sentence, stop_punctuation)
     if stamp:
         print("---Removing Stopwords---")
         print("Stopwords in", language, ":", stopwords_list)
@@ -80,7 +86,7 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
         :param method: string which define which method to call
         :param frequency: if not None define minimum number of words repetition
         :param percentage: percentage of the highest frequent words to take
-        :return Counter: sentence cleaned
+        :return Counter(key=word,value=frequency): sentence cleaned
     """
     tokenized: Counter = rm_stopwords_punctuation(sentence)
     if frequency is None or frequency <= 0:
@@ -98,3 +104,21 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
             filtered = dict(filter(lambda x: x[1] >= frequency-i, tokenized.items()))
             i += 1
         return globals()[method](Counter(filtered))
+
+
+def get_dependency_tree(verb: Verb, sentence: str):
+    """
+    Create the verb with its slots.
+    Words are assigned to the slot with number equal to the index of the value
+    they correspond to in the "resources.arguments" list.
+    :param verb: verb to update
+    :param sentence: From which to extract subject and complement
+    """
+    doc = nlp(sentence)
+    for token in doc:
+        if token.head.pos_ == "VERB" and (token.dep_ in resources.arguments):
+            synset = lesk(word=token.text, sentence=sentence)
+            verb.add_filler(token.text, synset, resources.arguments.index(token.dep_))
+
+    # print(token.text, token.dep_, token.head.text, token.head.pos_,
+    #       [child for child in token.children])

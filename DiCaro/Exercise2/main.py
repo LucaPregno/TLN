@@ -1,7 +1,7 @@
 import os
 import pandas as pd
-import DiCaro.Utility.parser_utility as parser
-import DiCaro.Utility.wordnet_utility as wn_utility
+import DiCaro.Utility.parser as parser
+import DiCaro.Utility.wordnet as wn_utility
 
 input_path = os.path.abspath('../DiCaro/Exercise2/resources/content_to_form.xlsx')
 output_path = os.path.abspath('../DiCaro/Exercise2/resources/output.txt')
