@@ -13,7 +13,7 @@ def main():
     df = pd.read_excel(input_path, usecols="B:I").fillna("o")
     print("Using", parser.LEMMER)
     concept_table = process(df, parser.LEMMER)
-    concept_list = wn_utility.get_concept(concept_table)
+    concept_list = wn_utility.genus_differentia(concept_table)
     write_output(concept_list)
 
 

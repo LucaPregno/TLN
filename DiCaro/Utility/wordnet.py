@@ -1,9 +1,9 @@
 from collections import Counter
 from nltk.corpus import wordnet
-import DiCaro.Utility.parser as parser
+from DiCaro.Utility import resources, parser
 
 
-def get_concept(table: list):
+def genus_differentia(table: list):
     """
     For each table row (concept definition) calculate highest intersection between
     the row words with the related (hypernyms, hyponyms, siblings) definition of the corresponding synsets.
@@ -11,19 +11,18 @@ def get_concept(table: list):
     :return concepts: list of concept with his associated score
     """
     concepts = list()
-    for row in table:
-        hypernyms = hyponyms = siblings = related_synsets = set()
+    for sentence in table:
+        siblings = related_synsets = set()
         best_synset = None
         best_score = 0
-        for word in row:
+        for word in sentence:
             synsets = wordnet.synsets(word)
-            hypernyms = get_hypernyms(synsets)
-            for hyper in hypernyms:
+            for hyper in get_hypernyms(synsets):
                 siblings = siblings.union(hyper.hyponyms())
             related_synsets.update(synsets, get_hyponyms(synsets), siblings)
 
             for related in related_synsets:
-                new_synset, new_score = bag_of_words_weighted(related, row)
+                new_synset, new_score = bag_of_words_weighted(related, sentence)
                 if new_score > best_score:
                     best_score = new_score
                     best_synset = new_synset
@@ -72,10 +71,16 @@ def bag_of_words_weighted(synset, term_dictionary: Counter) -> tuple:
 
 def lesk(word: str, sentence: str):
     """
+    If word is a pronoun return person synset, otherwise apply lesk algorithm
     :param word: word needs to be disambiguated
     :param sentence: used to disambiguate
     :return: synset with best intersection between phrase and word context
     """
+    # If the word is catalogued return
+    ambiguous = catalogue_ambiguous_terms(word)
+    if ambiguous is not False:
+        return ambiguous
+
     synsets = wordnet.synsets(word)
     sentence = set(parser.cleaning(sentence=sentence, method=parser.LEMMER))
     best_synset = None
@@ -86,3 +91,18 @@ def lesk(word: str, sentence: str):
             best_score = new_score
             best_synset = new_synset
     return best_synset
+
+
+def catalogue_ambiguous_terms(word):
+    ambiguous = resources.super_sense_dictionary.keys()
+    if word[0].isupper() or word in ambiguous:
+        word = word.lower()
+        # If the word is a dictionary key return correspondent synset
+        for key in ambiguous:
+            if word in key:
+                value = resources.super_sense_dictionary[key]
+                return wordnet.synset(value)
+        # Proper Noun
+        return wordnet.synset("entity.n.01")
+
+    return False

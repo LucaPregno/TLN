@@ -2,6 +2,7 @@ import importlib
 import DiCaro.Utility.parser as parser
 from nltk.corpus import brown
 from DiCaro.Exercise3.verb import Verb
+from DiCaro.Utility import resources
 
 
 def main(*words: str, corpus: str = 'nltk.corpus.brown'):
@@ -27,6 +28,7 @@ def extract_from_corpus(word):
             s += w + " "
         parser.get_dependency_tree(verb, s)
     print(verb.print())
-    a = 0
+    print(len(verb.arguments[0]))
+    print(len(verb.arguments[1]))
 
 

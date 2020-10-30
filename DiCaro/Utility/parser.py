@@ -117,8 +117,10 @@ def get_dependency_tree(verb: Verb, sentence: str):
     doc = nlp(sentence)
     for token in doc:
         if token.head.pos_ == "VERB" and (token.dep_ in resources.arguments):
-            synset = lesk(word=token.text, sentence=sentence)
-            verb.add_filler(token.text, synset, resources.arguments.index(token.dep_))
+            lemma = lemmatizer.lemmatize(token.text)
+            synset = lesk(word=lemma, sentence=sentence)
+            if synset is not None:
+                verb.add_filler(lemma, synset, resources.arguments.index(token.dep_))
 
     # print(token.text, token.dep_, token.head.text, token.head.pos_,
     #       [child for child in token.children])
