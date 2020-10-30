@@ -120,7 +120,4 @@ def get_dependency_tree(verb: Verb, sentence: str):
             lemma = lemmatizer.lemmatize(token.text)
             synset = lesk(word=lemma, sentence=sentence)
             if synset is not None:
-                verb.add_filler(lemma, synset, resources.arguments.index(token.dep_))
-
-    # print(token.text, token.dep_, token.head.text, token.head.pos_,
-    #       [child for child in token.children])
+                verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
