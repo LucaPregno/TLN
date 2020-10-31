@@ -35,10 +35,3 @@ class Verb:
             counter = Counter(a.values())
             frequency_list.append(counter)
         return frequency_list
-
-
-class Sentence:
-    def __init__(self, sentence: str, subj: str, obj: str):
-        self.sentence = sentence
-        self.subj = subj
-        self.obj = obj

@@ -3,8 +3,6 @@ from nltk import word_tokenize, pos_tag, WordNetLemmatizer, PorterStemmer, Count
 from nltk.corpus import stopwords
 from DiCaro.Utility import utility, resources
 from DiCaro.Utility.wordnet import lesk
-from DiCaro.Exercise3.verb import Verb
-
 
 LEMMER = "lemmer"
 LEMMER_SET = "lemmer_set"
@@ -34,9 +32,9 @@ def lemmer_set(tokens, stamp=False) -> set:
     if stamp:
         print("---Lemming---")
         for i, t in enumerate(tokens):
-            l = lemmatizer.lemmatize(t)
-            lemmed.add(l)
-            print(t, " ==> ", l)
+            lemma = lemmatizer.lemmatize(t)
+            lemmed.add(lemma)
+            print(t, " ==> ", lemma)
         print("Lemmed:", lemmed)
     else:
         for t in tokens:
@@ -104,7 +102,7 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
         return globals()[method](Counter(filtered))
 
 
-def get_hanks_verb(verb: Verb, sentence: str, word: str):
+def get_hanks_verb(sentence: str, word: str) -> dict:
     """
     Create the verb with its slots.
     Words are assigned to the slot with number equal to the index of the value
@@ -113,15 +111,33 @@ def get_hanks_verb(verb: Verb, sentence: str, word: str):
     :param sentence: From which to extract subject and complement
     :param word: word that must be a verb
     """
-    # sentence = "The singer wants to play a guitar"
+    # sentence = "He likes to play bass because he doesn't have to solo . "
     doc = nlp(sentence)
     print(sentence)
+    dep_dictionary = dict()
+
     for token in doc:
-        if token.dep_ in resources.arguments:
-            print(token.lemma_, token.pos_, token.dep_)
-        # print(token.lemma_, token.pos_, token.dep_)
-        # if token.head.pos_ == "VERB" and (token.dep_ in resources.arguments):
-        #     lemma = token.lemma_
-        #     synset = lesk(word=lemma, sentence=sentence)
-        #     if synset is not None:
-        #         verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
+        if token.dep_ in resources.arguments and word in token.head.lemma_:
+            print(token.lemma_, token.pos_, token.dep_, "HEAD", token.head.text)
+            lemma = token.lemma_
+            tag = token.pos_
+            # If it is a pronoun spacy write -PRON- as lemma
+            if tag in resources.pronoun:
+                ambiguous = catalogue_ambiguous_terms(token.text.lower())
+                dep_dictionary[token.text.lower()] = ambiguous
+            else:
+                synset = lesk(word=lemma, tag=tag, sentence=sentence)
+                if synset is not None:
+                    # verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
+                    dep_dictionary[lemma] = synset.lexname()
+    print(dep_dictionary)
+    return dep_dictionary
+
+
+def catalogue_ambiguous_terms(word: str):
+    for key in resources.super_sense_dictionary.keys():
+        if word.lower() in key:
+            return resources.super_sense_dictionary[key]
+
+    return "noun.entity"
+

@@ -69,40 +69,25 @@ def bag_of_words_weighted(synset, term_dictionary: Counter) -> tuple:
     return synset, score
 
 
-def lesk(word: str, sentence: str):
+def lesk(word: str, tag: str, sentence: str):
     """
     If word is a pronoun return person synset, otherwise apply lesk algorithm
     :param word: word needs to be disambiguated
+    :param tag: word pos tag
     :param sentence: used to disambiguate
     :return: synset with best intersection between phrase and word context
     """
-    # If the word is catalogued return
-    ambiguous = catalogue_ambiguous_terms(word)
-    if ambiguous is not False:
-        return ambiguous
-
-    synsets = wordnet.synsets(word)
+    synsets = wordnet.synsets(word, pos=wordnet.NOUN)
     sentence = set(parser.cleaning(sentence=sentence, method=parser.LEMMER))
-    best_synset = None
     best_score = 0
+    try:
+        best_synset = synsets[0]
+    except:
+        return None
+
     for synset in synsets:
         new_synset, new_score = bag_of_words(synset, sentence)
         if new_score > best_score:
             best_score = new_score
             best_synset = new_synset
     return best_synset
-
-
-def catalogue_ambiguous_terms(word):
-    ambiguous = resources.super_sense_dictionary.keys()
-    if word[0].isupper() or word in ambiguous:
-        word = word.lower()
-        # If the word is a dictionary key return correspondent synset
-        for key in ambiguous:
-            if word in key:
-                value = resources.super_sense_dictionary[key]
-                return wordnet.synset(value)
-        # Proper Noun
-        return wordnet.synset("entity.n.01")
-
-    return False

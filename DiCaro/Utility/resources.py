@@ -1,8 +1,8 @@
-punctuation = {',', ';', '(', ')', '{', '}', ':', '?', '!', '.', "'s"}
+punctuation = (",", ";", "(", ")", "{", "}", ":", "?", "!", ".", "'s", "`", "'")
 
 arguments = ("nsubj", "dobj")
-
+pronoun = ("PRON", "PROPN")
 super_sense_dictionary = {
-    ("i", "you", "he", "she", "we", "they"): "person.n.01",
-    ("it"): "entity.n.01"
+    ("i", "you", "he", "she", "we", "they", "who"): "noun.person",
+    "it": "noun.entity"
 }
