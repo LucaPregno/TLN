@@ -1,34 +1,37 @@
-import importlib
+from nltk import pos_tag
+
 import DiCaro.Utility.parser as parser
 from nltk.corpus import brown
 from DiCaro.Exercise3.verb import Verb
 from DiCaro.Utility import resources
 
 
-def main(*words: str, corpus: str = 'nltk.corpus.brown'):
-    # c = import_corpus(corpus)
+def main(*words: str):
     for word in words:
-        extract_from_corpus(word)
+        verb = extract_from_corpus(word)
+        # print(verb.print())
+        # print(verb.filler_frequency())
 
 
-def import_corpus(corpus: str):
-    try:
-        modules = importlib.import_module(corpus)
-        return modules
-    except ImportError:
-        print("Import exception occurred")
-
-
-def extract_from_corpus(word):
-    sentences = [s for s in brown.sents() if word in s]
+def extract_from_corpus(word: str):
+    sentences = brown.sents()
+    lemma = parser.lemmatizer.lemmatize(word)
     verb = Verb()
     for sentence in sentences:
-        s = ""
-        for w in sentence:
-            s += w + " "
-        parser.get_dependency_tree(verb, s)
-    print(verb.print())
-    print(len(verb.arguments[0]))
-    print(len(verb.arguments[1]))
+        if lemma not in parser.lemmer_set(sentence):
+            continue
+        if is_verb(lemma, sentence):
+            s = ""
+            for w in sentence:
+                s += w + " "
+            parser.get_hanks_verb(verb, s, word)
+
+    return verb
 
 
+def is_verb(lemma: str, sentence) -> bool:
+    tag = pos_tag(sentence)
+    for t in tag:
+        if lemma in t[0] and "VB" in t[1]:
+            return True
+    return False

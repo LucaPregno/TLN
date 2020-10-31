@@ -1,3 +1,6 @@
+from collections import Counter
+
+
 class Verb:
     def __init__(self, *slots: dict):
         self.arguments: list = [dict(), dict()]
@@ -8,8 +11,6 @@ class Verb:
         for i, slot in enumerate(self.arguments):
             print("Slot", i)
             print("Filler", slot)
-            # for filler in slot:
-            #     print("Filler:", filler)
 
     def append_slot(self, slot: dict):
         self.arguments.append(slot)
@@ -27,3 +28,17 @@ class Verb:
                 self.arguments.append(dict())
 
         self.arguments[slot_index][filler_key] = filler_value
+
+    def filler_frequency(self) -> list:
+        frequency_list = []
+        for a in self.arguments:
+            counter = Counter(a.values())
+            frequency_list.append(counter)
+        return frequency_list
+
+
+class Sentence:
+    def __init__(self, sentence: str, subj: str, obj: str):
+        self.sentence = sentence
+        self.subj = subj
+        self.obj = obj

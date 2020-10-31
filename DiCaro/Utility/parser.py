@@ -17,11 +17,9 @@ SPACY_CORE = 'en_core_web_sm'
 nlp = spacy.load(SPACY_CORE)
 
 
-def pos(tokens, language="eng"):
-    tagged = []
-    for i in range(len(tokens)):
-        tagged.append(pos_tag(tokens[i], lang=language))
-    return tagged
+def pos(sentence):
+    token = word_tokenize(sentence)
+    return pos_tag(token)
 
 
 def lemmer(tokens) -> Counter:
@@ -82,11 +80,11 @@ def rm_stopwords_punctuation(sentence, language="english", stamp=False) -> Count
 
 def cleaning(sentence: str, method: str, frequency: int = None, percentage: int = 0):
     """
-        :param sentence: Definition to clean
-        :param method: string which define which method to call
-        :param frequency: if not None define minimum number of words repetition
-        :param percentage: percentage of the highest frequent words to take
-        :return Counter(key=word,value=frequency): sentence cleaned
+    :param sentence: Definition to clean
+    :param method: string which define which method to call
+    :param frequency: if not None define minimum number of words repetition
+    :param percentage: percentage of the highest frequent words to take
+    :return Counter(key=word,value=frequency): sentence cleaned
     """
     tokenized: Counter = rm_stopwords_punctuation(sentence)
     if frequency is None or frequency <= 0:
@@ -106,18 +104,24 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
         return globals()[method](Counter(filtered))
 
 
-def get_dependency_tree(verb: Verb, sentence: str):
+def get_hanks_verb(verb: Verb, sentence: str, word: str):
     """
     Create the verb with its slots.
     Words are assigned to the slot with number equal to the index of the value
     they correspond to in the "resources.arguments" list.
     :param verb: verb to update
     :param sentence: From which to extract subject and complement
+    :param word: word that must be a verb
     """
+    # sentence = "The singer wants to play a guitar"
     doc = nlp(sentence)
+    print(sentence)
     for token in doc:
-        if token.head.pos_ == "VERB" and (token.dep_ in resources.arguments):
-            lemma = lemmatizer.lemmatize(token.text)
-            synset = lesk(word=lemma, sentence=sentence)
-            if synset is not None:
-                verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
+        if token.dep_ in resources.arguments:
+            print(token.lemma_, token.pos_, token.dep_)
+        # print(token.lemma_, token.pos_, token.dep_)
+        # if token.head.pos_ == "VERB" and (token.dep_ in resources.arguments):
+        #     lemma = token.lemma_
+        #     synset = lesk(word=lemma, sentence=sentence)
+        #     if synset is not None:
+        #         verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
