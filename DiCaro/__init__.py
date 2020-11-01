@@ -8,7 +8,7 @@ def main():
     print("You can choose between the following exercise:")
     # print("1 Concept similarity")
     # print("2 Content to form")
-    # print("3 ")
+    # print("3 Hanks")
     # x = int(input("Select the number of the exercise you wanna launch\n"))
     x = 3
     if x == 1:
@@ -19,8 +19,13 @@ def main():
         exercise2()
     elif x == 3:
         print("Hanks")
-        # word = input("Type the selected word")
-        exercise3("play")
+        words = ["play", "ok"]
+        word = ""
+        while "ok" != word:
+            print("Type: ok if you want to start the program")
+            word = input("Type verb\n")
+            words.append(word)
+        exercise3(words)
 
     print("\n")
 

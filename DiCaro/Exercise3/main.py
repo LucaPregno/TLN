@@ -5,8 +5,8 @@ from nltk.corpus import brown
 from DiCaro.Utility import resources, plot
 
 
-def main(*words: str):
-    for word in words:
+def main(words: list):
+    for word in words[:-1]:
         sem_types = extract_from_corpus(word)
         plot.plot_cluster(word, sem_types)
 
@@ -23,7 +23,7 @@ def extract_from_corpus(word: str):
             for w in sentence:
                 s += w + " "
             dep_dictionary = parser.get_hanks_verb(s, word)
-            if len(dep_dictionary.values()) > 0:
+            if len(dep_dictionary.values()) == len(resources.arguments):
                 dependency_list.append(dep_dictionary)
 
     sem_types = semantic_type_cluster(dependency_list)

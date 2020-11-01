@@ -5,7 +5,7 @@ from DiCaro.Utility import resources
 
 def plot_cluster(word: str, sem_types: Counter):
     print(sem_types)
-    sem_types = dict(sem_types.most_common(10))
+    sem_types = dict(sem_types.most_common(12))
     sem_type_relation = []
     for keys in sem_types.keys():
         name = ""

@@ -110,7 +110,6 @@ def get_hanks_verb(sentence: str, word: str) -> dict:
     :param sentence: From which to extract subject and complement
     :param word: word that must be a verb
     """
-    # sentence = "He likes to play bass because he doesn't have to solo . "
     doc = nlp(sentence)
     print(sentence)
     dep_dictionary = dict()
@@ -127,8 +126,8 @@ def get_hanks_verb(sentence: str, word: str) -> dict:
             else:
                 synset = lesk(word=lemma, sentence=sentence)
                 if synset is not None:
-                    # verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
                     dep_dictionary[lemma] = synset.lexname()
+
     print(dep_dictionary)
     return dep_dictionary
 
