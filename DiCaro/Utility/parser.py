@@ -107,7 +107,6 @@ def get_hanks_verb(sentence: str, word: str) -> dict:
     Create the verb with its slots.
     Words are assigned to the slot with number equal to the index of the value
     they correspond to in the "resources.arguments" list.
-    :param verb: verb to update
     :param sentence: From which to extract subject and complement
     :param word: word that must be a verb
     """
@@ -126,7 +125,7 @@ def get_hanks_verb(sentence: str, word: str) -> dict:
                 ambiguous = catalogue_ambiguous_terms(token.text.lower())
                 dep_dictionary[token.text.lower()] = ambiguous
             else:
-                synset = lesk(word=lemma, tag=tag, sentence=sentence)
+                synset = lesk(word=lemma, sentence=sentence)
                 if synset is not None:
                     # verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
                     dep_dictionary[lemma] = synset.lexname()
@@ -140,4 +139,3 @@ def catalogue_ambiguous_terms(word: str):
             return resources.super_sense_dictionary[key]
 
     return "noun.entity"
-
