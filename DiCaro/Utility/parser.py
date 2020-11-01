@@ -126,7 +126,7 @@ def get_hanks_verb(sentence: str, word: str) -> dict:
                 ambiguous = catalogue_ambiguous_terms(token.text.lower())
                 dep_dictionary[token.text.lower()] = ambiguous
             else:
-                synset = lesk(word=lemma, tag=tag, sentence=sentence)
+                synset = lesk(word=lemma, sentence=sentence)
                 if synset is not None:
                     # verb.add_filler(lemma, synset.lexname(), resources.arguments.index(token.dep_))
                     dep_dictionary[lemma] = synset.lexname()
