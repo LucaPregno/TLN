@@ -19,7 +19,7 @@ def main():
         exercise2()
     elif x == 3:
         print("Hanks")
-        words = ["play", "ok"]
+        words = []
         word = ""
         while "ok" != word:
             print("Type: ok if you want to start the program")

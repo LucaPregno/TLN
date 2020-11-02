@@ -7,30 +7,25 @@
 4. Define an algorithm to scan WordNet synsets using concept similarity
 
 ## Intro
-The purpose of this exercise is to take different definition of the same concept and extract the meaning more appropriate.
-This should be achieved retrieving the definitions inside the file *content_to_form* that are grouped by column and then
-searching the WordNet synset which is more similar to the definitions.
+The purpose of this exercise is to take different definition of the same concept and extract the more appropriate meaning.
+This is achieved by retrieving the definitions, grouped by columns, within the * content_to_form * file,
+then look for the WordNet synset closest to the definitions.
 
 ## Loading data & Preprocessing
-Similar to the first exercise the first phase consist on loading the file content_to_form.xlsx using panda. 
+Similar to the first exercise the first phase consist on loading *content_to_form.xlsx* file using panda. 
 The second phase consist on preprocessing and is implemented by the function ```cleaning``` :
 - removing stopwords and punctuation;
 - removing words with low frequency (as we will see later on this function provide different options);
 - lemming.
-This function is applied on the union of the definitions related to a single concept.
+This function applies to the union of definitions relating to a single concept.
 
-## Inference by WordNet
-In the third phase I followed the advice to implement a kind of *genus-differentia* approach.
-For each definition I create a set.
-For every word obtained from preprocessing I took the WN synsets and add them to the set with their:
-- hypernyms
-- hyponyms of the hypernyms.
-Then, since there is a close relation to hyponyms of the synset, I added them to the set too.
-Finally the fourth phase:
-for each synset in the related set (hypernyms, hyponyms and siblings(hyponyms of hypernyms)) I extracted the context.
-The context is obtained merging and then cleaning definition and examples of the synset.
-Then the best synset is calculated using the bag of words approach:
-finding the maximum intersection length between definition words and synset context.
+## WordNet inference
+In the third phase exploit a **genus-differentia** approach.
+In every single sentence for every word obtained by preprocessing, the ``wordnet.synsets()`` function extracts the corresponding WN synsets.
+Later from each synset are extracted their hypernyms (genus) and from these all their hyponyms.
+Then we move on to the *differentia*: look for the differences between the set of hyponyms found.
+This is achieved through a *bag of words* approach which assigns a score based on the length of the intersection
+between the definitions and the synset context. Context is achieved by cleaning and merging synset definition and examples.
 
 ```
 def bag_of_words_weighted(synset, term_dictionary: Counter) -> tuple:
@@ -42,19 +37,21 @@ def bag_of_words_weighted(synset, term_dictionary: Counter) -> tuple:
     return synset, score
 ```
 
-In order to improve the importance of the repeated words in definitions I decided to implement a little variation of the bag of words:
-the score is not simply based on the length of the intersection, but each time a word is present in the synset context 
-the score is incremented by the word frequency. In this way words that have a lot of repetitions have more impact in the
-choice of the synset.
+To improve the importance of repeated words in the definitions, was implemented a bag of words variation:
+it is not simply based on the intersection length, but the score is weighted by the frequency of the words in the definitions. 
+Using this approach repeated words have a greater impact on the synset choice.
 
 ## Results
+In the final stage it is possible to observe the results obtained through different cleaning methods.
 As mentioned before cleaning method provide different options:
 - filter based on words occurrence;
 - filter based on most common term;
 - alternative use of lemming or stemming.
 
+
+The algorithm was tested with different configurations of minimum frequency and percentages of most repeated words.
 Clearly there is no best solution overall, but every different preprocessing may create a better solution for a single concept.
-In my opinion the general best result was obtained with the first 40% of the most frequent words:
+In my opinion the best result was obtained using 40% of the most repeated words:
 
 Concept | Synset found | Definition | Score |
 | ---------| -------- | -------- | -------- |
@@ -68,7 +65,7 @@ Concept | Synset found | Definition | Score |
 | screw | Synset('solder.n.01') | an alloy (usually of lead and tin) used when melted to join two metal surfaces | 15 |
 
 The table shows the target meanings of the definitions and what obtained in the best configuration, 
-moreover, inside the *output.txt* file there are results obtained with different configurations.
+moreover, inside the file *output.txt* there are the results obtained with different configurations.
 In addition to the target concept is present the best synset found, and his description with the score retrieved.
 From the result we can see how the algorithm take the perfect synset only one time (Synset('greed.n.01')), 
 but descriptions show how meaning are close to the original concept.

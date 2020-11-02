@@ -11,7 +11,7 @@ ABSTRACT_S = "abstract_specific"
 
 
 def main():
-    # fill na cells with stopwords that will be removed
+    # Fill NA cells with stopwords that will be removed with cleaning method
     df = pd.read_excel(file_path, usecols="B:E").fillna("o")
     methods = [parser.LEMMER_SET, parser.STEMMER_SET]
     for method in methods:
