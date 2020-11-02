@@ -1,17 +1,16 @@
-import DiCaro.Utility.parser as parser
 from collections import Counter
 from nltk import pos_tag
 from nltk.corpus import brown
-from DiCaro.Utility import resources, plot
+from DiCaro.Utility import parser, resources, plot
 
 
 def main(words: list):
     for word in words[:-1]:
-        sem_types = extract_from_corpus(word)
+        sem_types = extract_sem_types(word)
         plot.plot_cluster(word, sem_types)
 
 
-def extract_from_corpus(word: str):
+def extract_sem_types(word: str):
     sentences = brown.sents()
     lemma = parser.lemmatizer.lemmatize(word)
     dependency_list = []
@@ -20,9 +19,10 @@ def extract_from_corpus(word: str):
             continue
         if is_verb(lemma, sentence):
             s = ""
-            for w in sentence:
-                s += w + " "
+            for token in sentence:
+                s += token + " "
             dep_dictionary = parser.get_hanks_verb(s, word)
+            # Values extracted must be the same number of arguments
             if len(dep_dictionary.values()) == len(resources.arguments):
                 dependency_list.append(dep_dictionary)
 

@@ -116,7 +116,7 @@ def get_hanks_verb(sentence: str, word: str) -> dict:
 
     for token in doc:
         if token.dep_ in resources.arguments and word in token.head.lemma_:
-            print(token.lemma_, token.pos_, token.dep_, "HEAD", token.head.text)
+            print(token.lemma_, token.pos_, token.dep_, "HEAD:", token.head.text)
             lemma = token.lemma_
             tag = token.pos_
             # If it is a pronoun spacy write -PRON- as lemma
