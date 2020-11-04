@@ -21,7 +21,7 @@ def extract_sem_types(word: str):
             s = ""
             for token in sentence:
                 s += token + " "
-            dep_dictionary = parser.get_hanks_verb(s, word)
+            dep_dictionary = parser.get_dependency(s, word)
             # Values extracted must be the same number of arguments
             if len(dep_dictionary.values()) == len(resources.arguments):
                 dependency_list.append(dep_dictionary)

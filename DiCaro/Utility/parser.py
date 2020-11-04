@@ -66,8 +66,8 @@ def stemmer_set(tokens, stamp=False) -> set:
 
 def rm_stopwords_punctuation(sentence, language="english", stamp=False) -> Counter:
     sentence = Counter(word_tokenize(sentence))
-    stopwords_list = Counter(stopwords.words(language))
-    stop_punctuation = stopwords_list + Counter(resources.punctuation)
+    stopwords_list = set(stopwords.words(language))
+    stop_punctuation = stopwords_list.union(resources.punctuation)
     filtered = utility.remove(sentence, stop_punctuation)
     if stamp:
         print("---Removing Stopwords---")
@@ -85,6 +85,7 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
     :return Counter(key=word,value=frequency): sentence cleaned
     """
     tokenized: Counter = rm_stopwords_punctuation(sentence)
+    tokenized = utility.remove_number_key(tokenized, minimum=1950, maximum=2030)
     if frequency is None or frequency <= 0:
         # If a percentage is defined take the first elements (based on percentage), otherwise take everything
         if percentage != 0:
@@ -102,7 +103,7 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
         return globals()[method](Counter(filtered))
 
 
-def get_hanks_verb(sentence: str, word: str) -> dict:
+def get_dependency(sentence: str, word: str) -> dict:
     """
     Create the verb with its slots.
     Words are assigned to the slot with number equal to the index of the value

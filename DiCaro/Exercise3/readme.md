@@ -64,6 +64,6 @@ Clusters were then printed using the [Matplotlib] library:
 Note that clusters are sorted by frequency and only the first 10 combinations are shown 
 because the following ones have remarkably low values.
 
-## Library
+
 [Spacy]: <https://spacy.io/>
 [Matplotlib]: <https://matplotlib.org/>

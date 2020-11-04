@@ -1,6 +1,7 @@
 from DiCaro.Exercise1.main import main as exercise1
 from DiCaro.Exercise2.main import main as exercise2
 from DiCaro.Exercise3.main import main as exercise3
+from DiCaro.Exercise4.main import main as exercise4
 from DiCaro.Utility.utility import remove
 
 
@@ -9,8 +10,9 @@ def main():
     # print("1 Concept similarity")
     # print("2 Content to form")
     # print("3 Hanks")
+    # print("4 Document segmentation")
     # x = int(input("Select the number of the exercise you wanna launch\n"))
-    x = 3
+    x = 4
     if x == 1:
         print("Concept similarity")
         exercise1()
@@ -26,6 +28,9 @@ def main():
             word = input("Type verb\n")
             words.append(word)
         exercise3(words)
+    elif x == 4:
+        print("Document segmentation")
+        exercise4()
 
     print("\n")
 
