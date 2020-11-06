@@ -10,7 +10,7 @@ def main():
     # print("1 Concept similarity")
     # print("2 Content to form")
     # print("3 Hanks")
-    # print("4 Document segmentation")
+    # print("4 Text tiling")
     # x = int(input("Select the number of the exercise you wanna launch\n"))
     x = 4
     if x == 1:
