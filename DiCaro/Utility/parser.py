@@ -79,7 +79,7 @@ def rm_stopwords_punctuation(sentence: str, language="english", stamp=False) -> 
     return filtered
 
 
-def cleaning(sentence: str, method: str, frequency: int = None, percentage: int = 0):
+def cleaning(sentence: str, method: str, frequency: int = 0, percentage: int = 0):
     """
     :param sentence: Definition to clean
     :param method: string which define which method to call
@@ -89,14 +89,7 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
     """
     tokenized: Counter = rm_stopwords_punctuation(sentence)
     tokenized = utility.remove_number_key(tokenized, minimum=1950, maximum=2030)
-    if frequency is None or frequency <= 0:
-        # If a percentage is defined take the first elements (based on percentage), otherwise take everything
-        if percentage != 0:
-            percentage = int((percentage/100) * len(tokenized))
-            most_common = tokenized.most_common(percentage)
-            tokenized = Counter(dict(filter(lambda elem: elem[0] in dict(most_common).keys(), tokenized.items())))
-        return globals()[method](tokenized)
-    else:
+    if frequency > 0:
         # Filtering only words with at least frequency occurrences
         filtered = dict(filter(lambda x: x[1] >= frequency, tokenized.items()))
         i = 1
@@ -104,6 +97,13 @@ def cleaning(sentence: str, method: str, frequency: int = None, percentage: int 
             filtered = dict(filter(lambda x: x[1] >= frequency-i, tokenized.items()))
             i += 1
         return globals()[method](Counter(filtered))
+    # If a percentage is defined take the first elements (based on percentage), otherwise take everything
+    elif percentage > 0:
+        percentage = int((percentage/100) * len(tokenized))
+        most_common = tokenized.most_common(percentage)
+        tokenized = Counter(dict(filter(lambda elem: elem[0] in dict(most_common).keys(), tokenized.items())))
+
+    return globals()[method](tokenized)
 
 
 def get_dependency(sentence: str, word: str) -> dict:

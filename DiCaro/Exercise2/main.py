@@ -4,8 +4,8 @@ from DiCaro.Utility import parser, wordnet
 
 INPUT_PATH = os.path.abspath('../DiCaro/Exercise2/resources/content_to_form.xlsx')
 OUTPUT_PATH = os.path.abspath('../DiCaro/Exercise2/resources/output.txt')
-MIN_FREQUENCY = 0
-PERCENTAGE = 50
+MIN_FREQUENCY = 5
+MOST_COMMON_PERCENTAGE = 0
 
 
 def main():
@@ -22,14 +22,14 @@ def process(df, clean_method: str) -> list:
         concept = ""
         for definition in df[column]:
             concept += definition
-        cleaned = parser.cleaning(concept, clean_method, frequency=MIN_FREQUENCY, percentage=PERCENTAGE)
+        cleaned = parser.cleaning(concept, clean_method, frequency=MIN_FREQUENCY, percentage=MOST_COMMON_PERCENTAGE)
         processed.append(cleaned)
     return processed
 
 
 def write_output(concept_list):
     file = open(OUTPUT_PATH, "a")
-    file.write(f'\nFrequency:{MIN_FREQUENCY} Percentage:{PERCENTAGE} Method:{parser.LEMMER}\n\n')
+    file.write(f'\nFrequency:{MIN_FREQUENCY} Percentage:{MOST_COMMON_PERCENTAGE} Method:{parser.LEMMER}\n\n')
     for c in concept_list:
         line = f'{c[0]} {c[0].definition()} | Score:{c[1]}'
         print(line)

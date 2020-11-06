@@ -1,6 +1,5 @@
 import os
 import re
-from collections import Counter
 from DiCaro.Utility import parser, plot
 
 INPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/input.txt')
