@@ -64,8 +64,11 @@ def stemmer_set(tokens, stamp=False) -> set:
     return stemmed
 
 
-def rm_stopwords_punctuation(sentence, language="english", stamp=False) -> Counter:
-    sentence = Counter(word_tokenize(sentence))
+def rm_stopwords_punctuation(sentence: str, language="english", stamp=False) -> Counter:
+    tokens = word_tokenize(sentence)
+    if len(tokens) > 0:
+        tokens[0] = tokens[0].lower()
+    sentence = Counter(tokens)
     stopwords_list = set(stopwords.words(language))
     stop_punctuation = stopwords_list.union(resources.punctuation)
     filtered = utility.remove(sentence, stop_punctuation)
