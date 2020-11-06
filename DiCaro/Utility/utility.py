@@ -31,11 +31,13 @@ def remove_number_key(multiset: Counter, minimum: int = math.inf, maximum: int =
 
 
 def get_frequency_matrix(cluster_table: list, most_common: int):
-    keys = flat_no_duplicate(cluster_table)
     # List of most common words
     commons = list(most_common_counter(cluster_table, most_common).keys())
 
-    frequency_matrix = array(zeros((len(commons), len(cluster_table))))
+    frequency_matrix = array(
+        zeros((len(commons), len(cluster_table))),
+        dtype=int
+    )
     for j, counter in enumerate(cluster_table):
         for k in counter:
             if k in commons:
@@ -69,28 +71,28 @@ def most_common_counter(counter_list, most_common: int = 0, step: int = 1):
 #     print("CLUSTERED SENTENCES WITH STEP", step)
 #     print(list(map(print, table_sentence)))
 #     return table_sentence
-
-
-def flat_no_duplicate(nested_list: list):
-    """
-    :param nested_list:
-    :return: Flatten nested list without duplicate
-    """
-    keys = []
-    for lst in nested_list:
-        if len(lst) > 0:
-            # Concatenate and flatten the counter dictionary keys
-            if lst[0] is dict or Counter:
-                keys = reduce(add_not_present, list(lst.keys()), keys)
-            else:
-                keys = reduce(add_not_present, lst.keys(), keys)
-        # keys.append(
-        #   reduce(lambda first, second: first + [second], list(counter.keys()), [])
-        # )
-    return keys
-
-
-def add_not_present(lst1: list, element: str):
-    if element not in lst1:
-        lst1 = lst1 + [element]
-    return lst1
+#
+#
+# def flat_no_duplicate(nested_list: list):
+#     """
+#     :param nested_list:
+#     :return: Flatten nested list without duplicate
+#     """
+#     keys = []
+#     for lst in nested_list:
+#         if len(lst) > 0:
+#             # Concatenate and flatten the counter dictionary keys
+#             if lst[0] is dict or Counter:
+#                 keys = reduce(add_not_present, list(lst.keys()), keys)
+#             else:
+#                 keys = reduce(add_not_present, lst.keys(), keys)
+#         # keys.append(
+#         #   reduce(lambda first, second: first + [second], list(counter.keys()), [])
+#         # )
+#     return keys
+#
+#
+# def add_not_present(lst1: list, element: str):
+#     if element not in lst1:
+#         lst1 = lst1 + [element]
+#     return lst1

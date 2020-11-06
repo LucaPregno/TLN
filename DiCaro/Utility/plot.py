@@ -29,13 +29,15 @@ def plot_cluster(word: str, sem_types: Counter):
 
 
 def print_table(cluster_table: list, most_common: int):
-    table = PrettyTable()
     keys, frequency_matrix = get_frequency_matrix(cluster_table, most_common)
     # Header
-    table.field_names = ["Words", [i for i in range(0, len(cluster_table), CLUSTER_STEP)]]
+    table = PrettyTable()
+    table.field_names = ["Words"] + [i for i in range(0, len(cluster_table), 1)]
     # Body
     for i, k in enumerate(keys):
-        table.add_row([k, frequency_matrix[i]])
+        table.add_row([k] + list(frequency_matrix[i]))
+
+    table.vrules = 2
     print(table)
 
 
