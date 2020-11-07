@@ -70,7 +70,7 @@ def rm_stopwords_punctuation(sentence: str, language="english", stamp=False) -> 
         tokens[0] = tokens[0].lower()
     sentence = Counter(tokens)
     stopwords_list = set(stopwords.words(language))
-    stop_punctuation = stopwords_list.union(resources.punctuation)
+    stop_punctuation = stopwords_list.union(resources.punctuation).union(resources.ambiguous)
     filtered = utility.remove(sentence, stop_punctuation)
     if stamp:
         print("---Removing Stopwords---")

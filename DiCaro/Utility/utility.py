@@ -1,6 +1,5 @@
 import math
 from collections import Counter
-from functools import reduce
 from numpy.core import array, zeros
 
 
@@ -58,41 +57,3 @@ def most_common_counter(counter_list, most_common: int = 0, step: int = 1):
             sum_counter[item[0]] = item[1]
 
     return sum_counter
-
-
-# def cluster_sentences(sentences: list, step: int = 4) -> list:
-#     table_sentence = []
-#     counter = Counter()
-#     for i in range(len(sentences)):
-#         counter = counter + sentences[i]
-#         if i % step == 0 or i == len(sentences):
-#             table_sentence.append(counter.copy())
-#             counter.clear()
-#     print("CLUSTERED SENTENCES WITH STEP", step)
-#     print(list(map(print, table_sentence)))
-#     return table_sentence
-#
-#
-# def flat_no_duplicate(nested_list: list):
-#     """
-#     :param nested_list:
-#     :return: Flatten nested list without duplicate
-#     """
-#     keys = []
-#     for lst in nested_list:
-#         if len(lst) > 0:
-#             # Concatenate and flatten the counter dictionary keys
-#             if lst[0] is dict or Counter:
-#                 keys = reduce(add_not_present, list(lst.keys()), keys)
-#             else:
-#                 keys = reduce(add_not_present, lst.keys(), keys)
-#         # keys.append(
-#         #   reduce(lambda first, second: first + [second], list(counter.keys()), [])
-#         # )
-#     return keys
-#
-#
-# def add_not_present(lst1: list, element: str):
-#     if element not in lst1:
-#         lst1 = lst1 + [element]
-#     return lst1

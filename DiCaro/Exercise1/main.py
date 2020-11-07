@@ -3,7 +3,7 @@ import pandas as pd
 import DiCaro.Utility.parser as parser
 from DiCaro.Utility import similarity
 
-file_path = os.path.abspath('../DiCaro/Exercise1/definizioni.xlsx')
+file_path = os.path.abspath('../DiCaro/Exercise1/resources/definizioni.xlsx')
 CONCRETE_G = "concrete_generic"
 CONCRETE_S = "concrete_specific"
 ABSTRACT_G = "abstract_generic"

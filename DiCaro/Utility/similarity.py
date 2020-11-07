@@ -26,7 +26,7 @@ def compute_similarity(sentences_as_counter: list):
                 follow_similarity = counter_intersection_similarity(group, sentences_as_counter[i+1])
 
             group_average = (prev_similarity + follow_similarity)/2
-            print(f'Group number {i} global average {group_average}')
+            print(f'Group number {i} with average {group_average}')
             global_average += group_average
 
     global_average /= len(sentences_as_counter)
@@ -36,7 +36,7 @@ def compute_similarity(sentences_as_counter: list):
 def counter_intersection_similarity(counter1: Counter, counter2: Counter):
     cohesion = counter_intersection_length(counter1, counter2)
     min_length = min_counter_length(counter1, counter2)
-    # Preventing the division by 0
+    # Preventing division by 0
     if min_length > 0:
         return cohesion/min_length
     else:

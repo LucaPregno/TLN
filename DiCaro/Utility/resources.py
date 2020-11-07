@@ -1,4 +1,5 @@
 punctuation = (".", ",", ";", ":", "?", "!", "(", ")", "[", "]", "{", "}", "//", "``", "''", '""', "'s", "$")
+ambiguous = ("e", "g", "etc")
 
 arguments = ("nsubj", "dobj")
 pronoun = ("PRON", "PROPN")
