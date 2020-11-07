@@ -39,4 +39,17 @@ def print_table(cluster_table: list, most_common: int):
     print(table)
 
 
+def text_tiling_graph(average_list: list, min_list: list, global_average: int,
+                      x_length: int, step: int):
+    x = range(0, x_length, step)
+    y = average_list
+    for x_min in min_list:
+        plt.axvline(x_min[1]*step, color='r')
+    plt.axhline(global_average, color='blue')
+    # plt.annotate('local max', xy=(2, 1), xytext=(3, 1.5),
+    #              arrowprops=dict(facecolor='black', shrink=0.05),
+    #              )
+    # plt.ylim(0, 1)
+    plt.plot(x, y, '#000000')
+    plt.show()
 

@@ -15,8 +15,9 @@ def concept_similarity(value_table: dict):
         print(f'{elem} with average {average}')
 
 
-def compute_similarity(sentences_as_counter: list):
+def compute_similarity(sentences_as_counter: list) -> tuple:
     global_average = 0
+    local_average = []
     for i, group in enumerate(sentences_as_counter):
         if len(group) >= 0:
             prev_similarity = follow_similarity = 0
@@ -26,11 +27,13 @@ def compute_similarity(sentences_as_counter: list):
                 follow_similarity = counter_intersection_similarity(group, sentences_as_counter[i+1])
 
             group_average = (prev_similarity + follow_similarity)/2
-            print(f'Group number {i} with average {group_average}')
+            local_average.append(group_average)
             global_average += group_average
+            # print(f'Group number {i} with average {group_average}')
 
     global_average /= len(sentences_as_counter)
-    print(f'Global average {global_average}')
+    # print(f'Global average {global_average}')
+    return local_average, global_average
 
 
 def counter_intersection_similarity(counter1: Counter, counter2: Counter):

@@ -4,16 +4,19 @@ from collections import Counter
 from DiCaro.Utility import parser, plot, similarity
 
 INPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/input.txt')
-CLUSTER_STEP = [1, 4, 8]
+CLUSTER_STEP = [5]
 MOST_COMMON_WORDS = 15
 
 
 def main():
     for step in CLUSTER_STEP:
         print("CLUSTERING WITH STEP:", step)
-        sentences_as_counter = process_file(INPUT_PATH, step)
+        sentences = process_file(INPUT_PATH, step)
+        sentences_as_counter = cluster_sentences(sentences, step=step)
         plot.print_table(sentences_as_counter, MOST_COMMON_WORDS)
-        similarity.compute_similarity(sentences_as_counter)
+        average_list, global_average = similarity.compute_similarity(sentences_as_counter)
+        min_list = text_tiling(average_list, global_average)
+        plot.text_tiling_graph(average_list, min_list, global_average, len(sentences), step)
 
 
 def process_file(path: str, step: int = 1) -> list:
@@ -32,7 +35,7 @@ def process_file(path: str, step: int = 1) -> list:
         if len(sentence_counter.keys()) > 0:
             cleaned_sentences.append(sentence_counter)
 
-    return cluster_sentences(cleaned_sentences, step=step)
+    return cleaned_sentences
 
 
 def cluster_sentences(sentences: list, step: int) -> list:
@@ -45,3 +48,19 @@ def cluster_sentences(sentences: list, step: int) -> list:
             counter.clear()
 
     return table_sentence
+
+
+def text_tiling(local_values: list, average: int):
+    local_mins = []
+    for i, value in enumerate(local_values):
+        if i == 0 or i == len(local_values) - 1:
+            continue
+        if is_local_min(value, local_values[i - 1], local_values[i + 1], average):
+            local_mins.append((value, i))
+
+    return local_mins
+
+
+def is_local_min(value: int, prev: int, follow: int, average: int) -> bool:
+    """ Return true if value is lower then global average, min then previous and under follow """
+    return value < average and (prev > value < follow)
