@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import DiCaro.Utility.parser as parser
-from DiCaro.Exercise1.similarity import compute_similarity
+from DiCaro.Utility import similarity
 
 file_path = os.path.abspath('../DiCaro/Exercise1/definizioni.xlsx')
 CONCRETE_G = "concrete_generic"
@@ -17,7 +17,7 @@ def main():
     for method in methods:
         print("Using", method)
         table = process(df, method)
-        compute_similarity(table)
+        similarity.concept_similarity(table)
 
 
 def process(df, clean_method: str):

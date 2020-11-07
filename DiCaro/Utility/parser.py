@@ -89,7 +89,9 @@ def cleaning(sentence: str, method: str, frequency: int = 0, percentage: int = 0
     """
     tokenized: Counter = rm_stopwords_punctuation(sentence)
     tokenized = utility.remove_number_key(tokenized, minimum=1950, maximum=2030)
-    if frequency > 0:
+    if len(tokenized) <= 0:
+        return Counter()
+    elif frequency > 0:
         # Filtering only words with at least frequency occurrences
         filtered = dict(filter(lambda x: x[1] >= frequency, tokenized.items()))
         i = 1
