@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+from matplotlib.patches import Patch
 from numpy import *
 from collections import Counter
 from prettytable import PrettyTable, ALL, FRAME, NONE
@@ -44,12 +46,14 @@ def text_tiling_graph(average_list: list, min_list: list, global_average: int,
     x = range(0, x_length, step)
     y = average_list
     for x_min in min_list:
-        plt.axvline(x_min[1]*step, color='r')
-    plt.axhline(global_average, color='blue')
-    # plt.annotate('local max', xy=(2, 1), xytext=(3, 1.5),
-    #              arrowprops=dict(facecolor='black', shrink=0.05),
-    #              )
-    # plt.ylim(0, 1)
-    plt.plot(x, y, '#000000')
+        plt.axvline(x_min[1]*step, color="r")
+    plt.axhline(global_average, color="blue")
+    plt.plot(x, y, color="black")
+    legend_elements = [Line2D([0], [0], color='r', label='Local min'),
+                       Line2D([0], [0], color='blue', label='Average'),
+                       Line2D([0], [0], color='black', label='Cohesion')]
+    plt.xlabel("Sentences")
+    plt.ylabel("Cohesion")
+    plt.legend(handles=legend_elements)
     plt.show()
 
