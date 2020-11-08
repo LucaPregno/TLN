@@ -1,29 +1,36 @@
 import os
 import re
 from collections import Counter
-from DiCaro.Utility import parser, plot, similarity
+from DiCaro.Utility import parser, plot, similarity, wordnet, utility
 
 INPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/input.txt')
-CLUSTER_STEP = [5]
+OUTPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/output.txt')
+CLUSTER_STEP = [2, 3, 4, 5, 6]
 MOST_COMMON_WORDS = 15
+MIN_FREQUENCY = 2
 
 
 def main():
     for step in CLUSTER_STEP:
         print("CLUSTERING WITH STEP:", step)
-        sentences = process_file(INPUT_PATH, step)
-        sentences_as_counter = cluster_sentences(sentences, step=step)
+        sentences = process_file(INPUT_PATH)
+        sentences_as_counter = cluster_sentences(sentences, break_points=[*range(0, len(sentences), step)])
         plot.print_table(sentences_as_counter, MOST_COMMON_WORDS)
         average_list, global_average = similarity.compute_similarity(sentences_as_counter)
         min_list = text_tiling(average_list, global_average)
         plot.text_tiling_graph(average_list, min_list, global_average, len(sentences), step)
+        print("Gain concept from definitions")
+        text_tiling_cluster = cluster_sentences(sentences, [*map(lambda x: x[1], min_list)])
+        concept_list = wordnet.genus_differentia(
+            [*map(lambda x: utility.filter_by_frequency(x, MIN_FREQUENCY), text_tiling_cluster)]
+        )
+        utility.write_on_file(concept_list, OUTPUT_PATH)
 
 
-def process_file(path: str, step: int = 1) -> list:
+def process_file(path: str) -> list:
     """
     Read the file and extract sentences, then cluster them
     :param path: file path to read
-    :param step: cluster step dimension
     :return: clustered Counter list of the sentences
     """
     file = open(path, "r")
@@ -38,12 +45,12 @@ def process_file(path: str, step: int = 1) -> list:
     return cleaned_sentences
 
 
-def cluster_sentences(sentences: list, step: int) -> list:
+def cluster_sentences(sentences: list, break_points: list):
     table_sentence = []
     counter = Counter()
     for i in range(len(sentences)):
         counter = counter + sentences[i]
-        if (i % step == 0 or i == len(sentences)) and len(counter.keys()) > 0:
+        if (i in break_points or i == len(sentences)) and len(counter.keys()) > 0:
             table_sentence.append(counter.copy())
             counter.clear()
 

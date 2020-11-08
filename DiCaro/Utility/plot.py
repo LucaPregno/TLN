@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch
 from numpy import *
 from collections import Counter
 from prettytable import PrettyTable, ALL, FRAME, NONE
@@ -56,4 +55,3 @@ def text_tiling_graph(average_list: list, min_list: list, global_average: int,
     plt.ylabel("Cohesion")
     plt.legend(handles=legend_elements)
     plt.show()
-

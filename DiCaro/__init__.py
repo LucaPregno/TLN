@@ -2,7 +2,7 @@ from DiCaro.Exercise1.main import main as exercise1
 from DiCaro.Exercise2.main import main as exercise2
 from DiCaro.Exercise3.main import main as exercise3
 from DiCaro.Exercise4.main import main as exercise4
-from DiCaro.Utility.utility import remove
+from DiCaro.Utility.utility import filter_by_set
 
 
 def main():

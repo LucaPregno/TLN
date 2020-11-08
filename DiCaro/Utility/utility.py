@@ -1,15 +1,23 @@
 import math
 from collections import Counter
 from numpy.core import array, zeros
+from DiCaro.Utility import parser
 
 
 def get_item(key, counter: Counter) -> Counter:
     return Counter({key: counter[key]})
 
 
-def remove(multiset: Counter, remove_set: set):
-    """ :return: result of removing set elements from first one """
-    return Counter(list(filter(lambda key: key not in remove_set, multiset.keys())))
+def filter_by_set(multiset: Counter, remove_set: set) -> Counter:
+    """ :return: Result of removing set elements from first one """
+    filtered = {key: count for key, count in multiset.items() if key not in remove_set}
+    return Counter(filtered)
+
+
+def filter_by_frequency(multiset: Counter, frequency: int):
+    """ :return: Removing elements with count less then frequency """
+    filtered = {key: count for key, count in multiset.items() if count >= frequency}
+    return Counter(filtered)
 
 
 def remove_number_key(multiset: Counter, minimum: int = math.inf, maximum: int = -math.inf):
@@ -26,7 +34,7 @@ def remove_number_key(multiset: Counter, minimum: int = math.inf, maximum: int =
             if int(key) < minimum or int(key) > maximum:
                 elem_to_remove.add(key)
 
-    return remove(multiset, elem_to_remove)
+    return filter_by_set(multiset, elem_to_remove)
 
 
 def get_frequency_matrix(cluster_table: list, most_common: int):
@@ -57,3 +65,17 @@ def most_common_counter(counter_list, most_common: int = 0, step: int = 1):
             sum_counter[item[0]] = item[1]
 
     return sum_counter
+
+
+def write_on_file(concept_list: list, path, frequency: int = 0, percentage: int = 0):
+    file = open(path, "a")
+    file.write(f'\nFrequency:{frequency} Percentage:{percentage} Method:{parser.LEMMER}\n\n')
+    for i, c in enumerate(concept_list):
+        if c[0] is not None:
+            line = f'{i}- {c[0]} {c[0].definition()} | Score:{c[1]}'
+            print(line)
+            file.write(f'{line}\n')
+        else:
+            print(f'{i}- No synset found')
+    file.write("-------------------------------------------------------------------------")
+    file.close()
