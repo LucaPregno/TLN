@@ -18,9 +18,9 @@
 |      data       1   4   1   1   0   0   0   0   0   0   0    0    0    0  |
 +---------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('language_learning.n.01') learning to use a language | Score:5
+0- Synset('developmental_learning.n.01') learning that takes place as a normal part of cognitive development | Score:5
 1- No synset found
-2- Synset('network.n.02') (broadcasting) a communication system consisting of a group of broadcasting stations that all transmit the same programs | Score:6
+2- Synset('old_boy_network.n.01') an exclusive informal network linking members of a social class or profession or organization in order to provide connections and information and favors (especially in business or politics) | Score:6
 3- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:39
 
 -------------------------------------------------------------------------
@@ -44,7 +44,7 @@
 |      data       1   3   2   0   1   0   0   0   0   0   0    0    0    0    0    0    0  |
 +------------------------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('language_learning.n.01') learning to use a language | Score:5
+0- Synset('developmental_learning.n.01') learning that takes place as a normal part of cognitive development | Score:5
 1- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:45
 
 -------------------------------------------------------------------------
@@ -68,9 +68,9 @@
 |      data       1   0   4   1   0   1   0   0   0   0   0    0    0    0    0    0    0    0    0    0    0  |
 +--------------------------------------------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('language_learning.n.01') learning to use a language | Score:5
-1- No synset found
-2- Synset('security_system.n.01') (computing) a system that enforces boundaries between computer networks | Score:4
+0- Synset('developmental_learning.n.01') learning that takes place as a normal part of cognitive development | Score:5
+1- Synset('old_boy_network.n.01') an exclusive informal network linking members of a social class or profession or organization in order to provide connections and information and favors (especially in business or politics) | Score:2
+2- Synset('data_system.n.01') system consisting of the network of all communication channels used within an organization | Score:4
 3- Synset('unskilled_person.n.01') a person who lacks technical training | Score:3
 4- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:38
 
@@ -95,12 +95,12 @@
 |      data       1   0   1   3   1   0   1   0   0   0   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0  |
 +--------------------------------------------------------------------------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('language_learning.n.01') learning to use a language | Score:5
-1- Synset('network.n.02') (broadcasting) a communication system consisting of a group of broadcasting stations that all transmit the same programs | Score:4
-2- Synset('train.v.02') undergo training or instruction in preparation for a particular role, function, or profession | Score:4
-3- Synset('windmill.n.02') generator that extracts usable energy from winds | Score:4
-4- No synset found
-5- No synset found
+0- Synset('developmental_learning.n.01') learning that takes place as a normal part of cognitive development | Score:5
+1- Synset('old_boy_network.n.01') an exclusive informal network linking members of a social class or profession or organization in order to provide connections and information and favors (especially in business or politics) | Score:4
+2- Synset('military_training.n.01') training soldiers in military procedures | Score:4
+3- Synset('dynamo.n.01') generator consisting of a coil (the armature) that rotates between the poles of an electromagnet (the field magnet) causing a current to flow in the armature | Score:4
+4- Synset('neural.a.02') of or relating to neurons | Score:2
+5- Synset('many.a.01') a quantifier that can be used with count nouns and is often preceded by `as' or `too' or `so' or `that'; amounting to a large but indefinite number | Score:2
 6- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:34
 
 -------------------------------------------------------------------------
@@ -124,15 +124,15 @@
 |      data       1   0   0   0   3   1   1   0   0   0   1    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0  |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- No synset found
-1- Synset('repeater.n.04') (electronics) electronic device that amplifies a signal before transmitting it again | Score:7
-2- No synset found
-3- No synset found
-4- Synset('horology.n.01') the art of designing and making clocks | Score:3
-5- No synset found
-6- Synset('experiment.n.02') the testing of an idea | Score:3
-7- Synset('counter.n.02') game equipment (as a piece of wood, plastic, or ivory) used for keeping a count or reserving a space in various card or board games | Score:4
-8- No synset found
+0- Synset('man.n.10') game equipment consisting of an object used in playing certain board games | Score:4
+1- Synset('reseau.n.02') a network of fine lines used by astronomers as a reference for measurements on star photographs | Score:9
+2- Synset('dynamo.n.01') generator consisting of a coil (the armature) that rotates between the poles of an electromagnet (the field magnet) causing a current to flow in the armature | Score:2
+3- Synset('neural.a.02') of or relating to neurons | Score:2
+4- Synset('commercial_art.n.01') art used for commercial purposes (as in advertising) | Score:5
+5- Synset('dark_matter.n.01') (cosmology) a hypothetical form of matter that is believed to make up 90 percent of the universe; it is invisible (does not absorb or emit light) and does not collide with atomic particles but exerts gravitational force | Score:4
+6- Synset('war_game.n.01') a simulation of a military operation intended to train military commanders or to demonstrate a situation or to test a proposed strategy | Score:5
+7- Synset('nightcap.n.03') the final game of a double header | Score:4
+8- Synset('graphic.n.01') an image that is generated by a computer | Score:4
 9- Synset('data_system.n.01') system consisting of the network of all communication channels used within an organization | Score:30
 
 -------------------------------------------------------------------------

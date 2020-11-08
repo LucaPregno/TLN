@@ -7,7 +7,7 @@ INPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/input.txt')
 OUTPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/output.txt')
 CLUSTER_STEP = [6, 5, 4, 3, 2]
 MOST_COMMON_WORDS = 15
-MIN_FREQUENCY = 3
+MIN_FREQUENCY = 2
 
 
 def main():
