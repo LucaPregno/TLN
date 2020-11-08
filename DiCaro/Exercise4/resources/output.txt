@@ -18,9 +18,9 @@
 |      data       1   4   1   1   0   0   0   0   0   0   0    0    0    0  |
 +---------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('internalization.n.01') learning (of values or attitudes etc.) that is incorporated within yourself | Score:5
+0- Synset('language_learning.n.01') learning to use a language | Score:5
 1- No synset found
-2- Synset('chicken_wire.n.01') a galvanized wire network with a hexagonal mesh; used to build fences | Score:6
+2- Synset('network.n.02') (broadcasting) a communication system consisting of a group of broadcasting stations that all transmit the same programs | Score:6
 3- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:39
 
 -------------------------------------------------------------------------
@@ -44,7 +44,7 @@
 |      data       1   3   2   0   1   0   0   0   0   0   0    0    0    0    0    0    0  |
 +------------------------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('internalization.n.01') learning (of values or attitudes etc.) that is incorporated within yourself | Score:5
+0- Synset('language_learning.n.01') learning to use a language | Score:5
 1- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:45
 
 -------------------------------------------------------------------------
@@ -68,10 +68,10 @@
 |      data       1   0   4   1   0   1   0   0   0   0   0    0    0    0    0    0    0    0    0    0    0  |
 +--------------------------------------------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('internalization.n.01') learning (of values or attitudes etc.) that is incorporated within yourself | Score:5
+0- Synset('language_learning.n.01') learning to use a language | Score:5
 1- No synset found
-2- Synset('chicken_wire.n.01') a galvanized wire network with a hexagonal mesh; used to build fences | Score:4
-3- No synset found
+2- Synset('security_system.n.01') (computing) a system that enforces boundaries between computer networks | Score:4
+3- Synset('unskilled_person.n.01') a person who lacks technical training | Score:3
 4- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:38
 
 -------------------------------------------------------------------------
@@ -95,10 +95,10 @@
 |      data       1   0   1   3   1   0   1   0   0   0   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0  |
 +--------------------------------------------------------------------------------------------------------------------------------------------+Frequency:0 Percentage:0 Method:lemmer
 
-0- Synset('internalization.n.01') learning (of values or attitudes etc.) that is incorporated within yourself | Score:5
-1- Synset('chicken_wire.n.01') a galvanized wire network with a hexagonal mesh; used to build fences | Score:4
-2- Synset('drill.n.04') (military) the training of soldiers to march (as in ceremonial parades) or to perform the manual of arms | Score:4
-3- Synset('turbogenerator.n.01') generator consisting of a steam turbine coupled to an electric generator for the production of electric power | Score:4
+0- Synset('language_learning.n.01') learning to use a language | Score:5
+1- Synset('network.n.02') (broadcasting) a communication system consisting of a group of broadcasting stations that all transmit the same programs | Score:4
+2- Synset('train.v.02') undergo training or instruction in preparation for a particular role, function, or profession | Score:4
+3- Synset('windmill.n.02') generator that extracts usable energy from winds | Score:4
 4- No synset found
 5- No synset found
 6- Synset('superhighway.n.02') an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | Score:34
@@ -128,10 +128,10 @@
 1- Synset('repeater.n.04') (electronics) electronic device that amplifies a signal before transmitting it again | Score:7
 2- No synset found
 3- No synset found
-4- No synset found
+4- Synset('horology.n.01') the art of designing and making clocks | Score:3
 5- No synset found
-6- No synset found
-7- Synset('net.n.05') game equipment consisting of a strip of netting dividing the playing area in tennis or badminton | Score:4
+6- Synset('experiment.n.02') the testing of an idea | Score:3
+7- Synset('counter.n.02') game equipment (as a piece of wood, plastic, or ivory) used for keeping a count or reserving a space in various card or board games | Score:4
 8- No synset found
 9- Synset('data_system.n.01') system consisting of the network of all communication channels used within an organization | Score:30
 
