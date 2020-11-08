@@ -5,9 +5,9 @@ from DiCaro.Utility import parser, plot, similarity, wordnet, utility
 
 INPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/input.txt')
 OUTPUT_PATH = os.path.abspath('../DiCaro/Exercise4/resources/output.txt')
-CLUSTER_STEP = [20, 5, 4, 3, 2]
+CLUSTER_STEP = [6, 5, 4, 3, 2]
 MOST_COMMON_WORDS = 15
-MIN_FREQUENCY = 5
+MIN_FREQUENCY = 4
 
 
 def main():
