@@ -46,9 +46,8 @@ def print_table(cluster_table: list, most_common: int, file_path: str, step: int
     file.close()
 
 
-def text_tiling_graph(average_list: list, min_list: list, global_average: int,
-                      x_length: int, step: int):
-    x = range(0, x_length, step)
+def text_tiling_graph(average_list: list, min_list: list, global_average: int, step: int):
+    x = range(0, len(average_list) * step, step)
     y = average_list
     for x_min in min_list:
         plt.axvline(x_min[1]*step, color="r")
