@@ -69,7 +69,7 @@ def most_common_counter(counter_list, most_common: int = 0, step: int = 1):
 
 def write_on_file(concept_list: list, path, frequency: int = 0, percentage: int = 0):
     file = open(path, "a")
-    file.write(f'\nFrequency:{frequency} Percentage:{percentage} Method:{parser.LEMMER}\n\n')
+    file.write(f'Frequency:{frequency} Percentage:{percentage} Method:{parser.LEMMER}\n\n')
     for i, c in enumerate(concept_list):
         if c[0] is not None:
             line = f'{i}- {c[0]} {c[0].definition()} | Score:{c[1]}'
@@ -77,5 +77,8 @@ def write_on_file(concept_list: list, path, frequency: int = 0, percentage: int 
             file.write(f'{line}\n')
         else:
             print(f'{i}- No synset found')
-    file.write("-------------------------------------------------------------------------")
+            file.write(f'{i}- No synset found\n')
+
+    print("\n")
+    file.write("\n-------------------------------------------------------------------------\n")
     file.close()

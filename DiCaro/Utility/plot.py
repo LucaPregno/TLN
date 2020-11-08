@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from numpy import *
 from collections import Counter
-from prettytable import PrettyTable, ALL, FRAME, NONE
+from prettytable import PrettyTable, FRAME
 from DiCaro.Utility import resources, utility
 
 
@@ -27,7 +27,7 @@ def plot_cluster(word: str, sem_types: Counter):
     plt.show()
 
 
-def print_table(cluster_table: list, most_common: int):
+def print_table(cluster_table: list, most_common: int, file_path: str, step: int):
     keys, frequency_matrix = utility.get_frequency_matrix(cluster_table, most_common)
     # Header
     table = PrettyTable()
@@ -37,7 +37,13 @@ def print_table(cluster_table: list, most_common: int):
         table.add_row([k] + list(frequency_matrix[i]))
 
     table.vrules = FRAME
+    plt.title(f'Cohesion function with cluster of {step}')
     print(table)
+    # Prints table on file
+    table_txt = table.get_string()
+    with open(file_path, 'a') as file:
+        file.write(table_txt)
+    file.close()
 
 
 def text_tiling_graph(average_list: list, min_list: list, global_average: int,

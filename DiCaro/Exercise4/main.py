@@ -15,10 +15,11 @@ def main():
         print("CLUSTERING WITH STEP:", step)
         sentences = process_file(INPUT_PATH)
         sentences_as_counter = cluster_sentences(sentences, break_points=[*range(0, len(sentences), step)])
-        plot.print_table(sentences_as_counter, MOST_COMMON_WORDS)
+        plot.print_table(sentences_as_counter, MOST_COMMON_WORDS, OUTPUT_PATH, step)
         average_list, global_average = similarity.compute_similarity(sentences_as_counter)
         min_list = text_tiling(average_list, global_average)
         plot.text_tiling_graph(average_list, min_list, global_average, len(sentences), step)
+
         print("Gain concept from definitions")
         text_tiling_cluster = cluster_sentences(sentences, [*map(lambda x: x[1], min_list)])
         concept_list = wordnet.genus_differentia(
