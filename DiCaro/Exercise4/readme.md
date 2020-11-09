@@ -88,8 +88,8 @@ Group | Synset found | Definition | Score |
 | 3 | Synset('unskilled_person.n.01') | a person who lacks technical training | 3 |
 | 4 | Synset('superhighway.n.02') | an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | 38 |
 
-As seen previously, unfortunately, the genus differentia algorithm is not perfect and therefore the concepts are not always exact, 
-but the general sense is often found.
+Genus differentia approach is not perfect most of all because sense sentence or group of sentences here 
+are not describing a word, but a topic.
 
 ### More data
 Following are the results with different types of clustering:

@@ -1,6 +1,6 @@
 from collections import Counter
 from nltk.corpus import wordnet
-from DiCaro.Utility import resources, parser
+from DiCaro.Utility import parser
 
 
 def genus_differentia(table: list):
