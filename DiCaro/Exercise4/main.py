@@ -20,12 +20,12 @@ def main():
         min_list = text_tiling(average_list, global_average)
         plot.text_tiling_graph(average_list, min_list, global_average, step)
 
-        # print("\n CONCEPT FROM DEFINITIONS\n")
-        # text_tiling_cluster = cluster_sentences(sentences, [*map(lambda x: x[1], min_list)])
-        # concept_list = wordnet.genus_differentia(
-        #     [*map(lambda x: utility.filter_by_frequency(x, MIN_FREQUENCY), text_tiling_cluster)]
-        # )
-        # utility.write_on_file(concept_list, OUTPUT_PATH)
+        print("\n CONCEPT FROM DEFINITIONS\n")
+        text_tiling_cluster = cluster_sentences(sentences, [*map(lambda x: x[1], min_list)])
+        concept_list = wordnet.genus_differentia(
+            [*map(lambda x: utility.filter_by_frequency(x, MIN_FREQUENCY), text_tiling_cluster)]
+        )
+        utility.write_on_file(concept_list, OUTPUT_PATH)
 
 
 def process_file(path: str) -> list:
