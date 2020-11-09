@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from numpy import *
 from collections import Counter
-from prettytable import PrettyTable, FRAME
+from prettytable import PrettyTable, FRAME, NONE
 from DiCaro.Utility import resources, utility
 
 
@@ -36,14 +36,14 @@ def print_table(cluster_table: list, most_common: int, file_path: str, step: int
     for i, k in enumerate(keys):
         table.add_row([k] + list(frequency_matrix[i]))
 
-    table.vrules = FRAME
+    table.vrules = NONE
     plt.title(f'Cohesion function with cluster of {step}')
     print(table)
     # Prints table on file
-    table_txt = table.get_string()
-    with open(file_path, 'a') as file:
-        file.write(table_txt)
-    file.close()
+    # table_txt = table.get_string()
+    # with open(file_path, 'a') as file:
+    #     file.write(table_txt)
+    # file.close()
 
 
 def text_tiling_graph(average_list: list, min_list: list, global_average: int, step: int):

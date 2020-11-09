@@ -57,9 +57,35 @@ points that are below global average and whose similarity is less than the previ
 Local minima are important because they allow us to define the cut points, that is, 
 those that divide the sentence into groups sharing the same topic.
 
-## Result
+## Results
+All these steps were performed by grouping the phrases with different dimensions.
+In particular, the four-sentence groups generated the following cohesion graph:
+
+![cohesion_4](../../assets/cohesion_4.png)
+
+Unfortunately the cohesion is not very high, this is due to the low quantity of common words between the groups of sentences.
+In the graph there are four local minima (marked in red), so in the next phase the initial text was divided according to those points.
+
+Now for each of the groups obtained thanks to text tiling, genus differentia approach has been applied (as in exercise 2) 
+in order to extract the concept closest to the sentences.
+Here the result for the four-sentences cluster:
 
 
+Group | Synset found | Definition | Score |
+| ---------| -------- | -------- | -------- |
+| 0 | Synset('developmental_learning.n.01') | learning that takes place as a normal part of cognitive development  | 5 |
+| 1 | Synset('old_boy_network.n.01') | an exclusive informal network linking members of a social class or profession or organization in order to provide connections and information and favors (especially in business or politics)  | 2 |
+| 2 | Synset('data_system.n.01') | system consisting of the network of all communication channels used within an organization | 4 |
+| 3 | Synset('unskilled_person.n.01') | a person who lacks technical training | 3 |
+| 4 | Synset('superhighway.n.02') | an extensive electronic network (such as the internet) used for the rapid transfer of sound and video and graphics in digital form | 38 |
 
+
+Following are the results with different types of clustering:
+
+![cohesion_4](../../assets/cohesion_6.png) ![cohesion_4](../../assets/cohesion_5.png)
+
+![cohesion_4](../../assets/cohesion_3.png) ![cohesion_4](../../assets/cohesion_2.png)
+
+The related tables and synsets extracted with the genus differentia approach can be found in the *output.txt* file.
 
 [GAN]: <https://en.wikipedia.org/wiki/Generative_adversarial_network>
