@@ -5,9 +5,9 @@ from collections import Counter
 from tensorflow.core.example import example_pb2
 
 
-BANDS_PATH = os.path.abspath('../DiCaro/NN_Exercise/resources/bands.csv')
-VOCABULARY_PATH = os.path.abspath('../DiCaro/NN_Exercise/resources/vocabulary.txt')
-TRAIN_BIN = os.path.abspath('../DiCaro/NN_Exercise/resources/train.bin')
+BANDS_PATH = os.path.abspath('../DiCaro/BS_Exercise/resources/bands.csv')
+VOCABULARY_PATH = os.path.abspath('../DiCaro/BS_Exercise/resources/vocabulary.txt')
+TRAIN_BIN = os.path.abspath('../DiCaro/BS_Exercise/resources/train.bin')
 
 
 def sent2char(sent):

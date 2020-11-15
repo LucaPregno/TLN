@@ -1,20 +1,19 @@
-from collections import namedtuple
-
 from DiCaro.Exercise1.main import main as exercise1
 from DiCaro.Exercise2.main import main as exercise2
 from DiCaro.Exercise3.main import main as exercise3
 from DiCaro.Exercise4.main import main as exercise4
-from DiCaro.Utility.utility import filter_by_set
+from DiCaro.BS_Exercise.model import main as exercise_rnn
 
 
-def main():
+if __name__ == '__main__':
     print("You can choose between the following exercise:")
     # print("1 Concept similarity")
     # print("2 Content to form")
     # print("3 Hanks")
     # print("4 Text tiling")
+    # print("5 Beam search")
     # x = int(input("Select the number of the exercise you wanna launch\n"))
-    x = 0
+    x = 5
     if x == 1:
         print("Concept similarity")
         exercise1()
@@ -33,17 +32,6 @@ def main():
     elif x == 4:
         print("Document segmentation")
         exercise4()
-
-    print("\n")
-
-
-def test():
-    p = namedtuple("Person", ["name", "age"])
-    john = p("John", 32)
-    print(john)
-    print(john.name)
-
-
-if __name__ == '__main__':
-    main()
-    test()
+    elif x == 5:
+        print("Generate metal band names")
+        exercise_rnn()

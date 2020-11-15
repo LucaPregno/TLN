@@ -4,7 +4,7 @@ import random
 import struct
 from tensorflow.core.example import example_pb2
 
-VOCABULARY_PATH = os.path.abspath('../DiCaro/NN_Exercise/resources/vocabulary.txt')
+VOCABULARY_PATH = os.path.abspath('../DiCaro/BS_Exercise/resources/vocabulary.txt')
 
 
 def example_generator(data_path):

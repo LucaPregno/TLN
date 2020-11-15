@@ -5,11 +5,11 @@ from keras.models import Sequential
 from keras.layers import GRU, Dense, Embedding, Dropout
 from keras.callbacks import LambdaCallback
 
-from DiCaro.NN_Exercise.batcher import Batcher
-from DiCaro.NN_Exercise.data import Vocabulary, VOCABULARY_PATH
-from DiCaro.NN_Exercise.beam_search import beam_search
+from DiCaro.BS_Exercise.batcher import Batcher
+from DiCaro.BS_Exercise.data import Vocabulary, VOCABULARY_PATH
+from DiCaro.BS_Exercise.beam_search import beam_search
 
-TRAIN_PATH = os.path.abspath('../DiCaro/NN_Exercise/resources/train.bin')
+TRAIN_PATH = os.path.abspath('../DiCaro/BS_Exercise/resources/train.bin')
 vocab = Vocabulary(VOCABULARY_PATH)
 
 params = {
@@ -19,7 +19,7 @@ params = {
     'vocab_size': vocab.size,
     'keep_prob': 0.8,
     'batch_size': 8,
-    'beam_size': 3,
+    'beam_size': 5,
     'seq_len': 50,
     'optimizer': 'adagrad'}
 
@@ -73,25 +73,26 @@ def make_name_beam(model, vocab, hps, random=False):
     print(tokens)
 
 
-iteration = 0
-while True:
-    batch = batcher.next_batch()
-    model.train_on_batch(batch.input, batch.target)
+def main():
+    iteration = 0
+    while True:
+        batch = batcher.next_batch()
+        model.train_on_batch(batch.input, batch.target)
 
-    if iteration % 1000 == 0:
-        print('Names generated after iteration %d:' % iteration)
+        if iteration % 1000 == 0:
+            print('Names generated after iteration %d:' % iteration)
 
-        print("Greedy approach")
-        for i in range(3):
-            make_name(model, vocab, hps)
+            print("Greedy approach")
+            for i in range(3):
+                make_name(model, vocab, hps)
 
-        print("\nBeam search random approach")
-        for i in range(3):
-            make_name_beam(model, vocab, hps, random=True)
+            print("\nBeam search random approach")
+            for i in range(3):
+                make_name_beam(model, vocab, hps, random=True)
 
-        print("\nBeam search deterministic approach")
-        make_name_beam(model, vocab, hps, random=False)
+            print("\nBeam search deterministic approach")
+            make_name_beam(model, vocab, hps, random=False)
 
-        print()
+            print()
 
-    iteration += 1
+        iteration += 1
