@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from DiCaro.Exercise1.main import main as exercise1
 from DiCaro.Exercise2.main import main as exercise2
 from DiCaro.Exercise3.main import main as exercise3
@@ -12,7 +14,7 @@ def main():
     # print("3 Hanks")
     # print("4 Text tiling")
     # x = int(input("Select the number of the exercise you wanna launch\n"))
-    x = 4
+    x = 0
     if x == 1:
         print("Concept similarity")
         exercise1()
@@ -35,5 +37,13 @@ def main():
     print("\n")
 
 
+def test():
+    p = namedtuple("Person", ["name", "age"])
+    john = p("John", 32)
+    print(john)
+    print(john.name)
+
+
 if __name__ == '__main__':
     main()
+    test()
