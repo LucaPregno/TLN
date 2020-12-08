@@ -71,7 +71,7 @@ def bag_of_words_weighted(synset, term_dictionary: Counter) -> tuple:
 
 def lesk(word: str, sentence: str):
     """
-    If word is a pronoun return person synset, otherwise apply lesk algorithm
+    Find the best synset of the word for the given sentence
     :param word: word needs to be disambiguated
     :param sentence: used to disambiguate
     :return: synset with best intersection between phrase and word context
